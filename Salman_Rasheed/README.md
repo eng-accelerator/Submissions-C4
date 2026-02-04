@@ -94,4 +94,3 @@ with gr.Blocks(title="AI Text Summarizer") as demo:
     theme_slider.change(lambda v: generate_css(v), theme_slider, style_block)
 
 demo.launch()
-
