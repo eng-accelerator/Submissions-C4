@@ -69,7 +69,7 @@ MODEL = "openai/gpt-oss-120b"  # model used for conversation; summarization uses
 DEFAULT_SUMMARY_MAX_TOKENS = 200
 
 # Prefer environment key if set; fall back to the embedded key if present
-api_key = os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENAI_API_KEY_PATH") or "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"
+api_key = os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENAI_API_KEY_PATH")
 
 if not api_key:
     st.warning("Please provide your OpenAI/OpenRouter API key via the OPENAI_API_KEY environment variable.")
@@ -366,6 +366,7 @@ if prompt := st.chat_input("What would you like to know?"):
         except Exception as e:
             st.error(f"Error: {str(e)}")
             st.info("Please check your API key and try again.")
+
 
 
 
