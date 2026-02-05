@@ -1,0 +1,415 @@
+{
+  "name": "Gmail_Automations",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "Email account\nControl Classification\nLabelling\nClean\nReply \n"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -864,
+        -208
+      ],
+      "typeVersion": 1,
+      "id": "54eb5f50-ec51-4ee5-aa0e-9178824d6854",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {
+          "sender": "gehornberger@gmail.com"
+        }
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1168,
+        32
+      ],
+      "id": "fc4e076c-b49b-48a3-a776-42a3566833fe",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "4NFLdvsjDhxikoXR",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.snippet }}{{ $json.Subject }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "Important Customer Email",
+              "description": "Any email where customer or user is requiring support or facing issues with a service"
+            },
+            {
+              "category": "Newletters",
+              "description": "new articles"
+            },
+            {
+              "category": "Promotional",
+              "description": "New Product information"
+            },
+            {
+              "category": "Feedback",
+              "description": "if a customer gave positive feedback "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1.1,
+      "position": [
+        -848,
+        32
+      ],
+      "id": "c3dfd962-0027-42be-82cc-c8e5e8a8d478",
+      "name": "Text Classifier"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -1008,
+        240
+      ],
+      "id": "dbd09dc8-8c71-4b71-a651-a9c10394e568",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "YhFcDG2bPiG1JVL0",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -80,
+        16
+      ],
+      "id": "61a7c58f-9e50-45ec-9e11-19570e9c3d12",
+      "name": "Delete a message",
+      "webhookId": "25c91aaf-10f6-4f61-87a4-f2eecba2a0a6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "4NFLdvsjDhxikoXR",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=User email-{{ $('Gmail Trigger').item.json.snippet }}\nUser Subject-{{ $('Gmail Trigger').item.json.Subject }}",
+        "options": {
+          "systemMessage": "You are an email expert to send reply to customer emails.\nBe polite and resolve customer queries based on our product or services.\n\nOur company name is - HCL Tech Support where you as SDR respond to customer queries\n\nif you are not sure reply with I'll inform a real assistant will assist you.\n\nEnd a message or sign off with HCL AI Support"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -176,
+        -272
+      ],
+      "id": "0906ff32-12ea-4194-9386-9c09a226d71f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        -112
+      ],
+      "id": "16526cdf-0fbb-4181-9aed-763237960286",
+      "name": "OpenRouter Chat Model1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "YhFcDG2bPiG1JVL0",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "reply",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "message": "Thank you for your feedback",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        80,
+        432
+      ],
+      "id": "e7cdf5f2-b972-4e61-949f-d35a819e3b33",
+      "name": "Reply to a message",
+      "webhookId": "253f9b4e-c2f0-4e0d-8ada-a55e396fc2a1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "4NFLdvsjDhxikoXR",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "thread",
+        "operation": "reply",
+        "threadId": "={{ $('Gmail Trigger').item.json.threadId }}",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "message": "Thank you",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        320,
+        80
+      ],
+      "id": "7fd13066-04c7-4f29-a16e-66ae1782588e",
+      "name": "Reply to a message1",
+      "webhookId": "3debe67d-98da-453a-96a9-67522e35bd46",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "4NFLdvsjDhxikoXR",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "={{ $('Gmail Trigger').item.json.Subject }}",
+        "message": "={{ $('Gmail Trigger').item.json.threadId }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        352,
+        -144
+      ],
+      "id": "36d83cd7-2173-42c9-af1b-bf00ff1eae78",
+      "name": "Create a draft",
+      "webhookId": "557f107f-1f2c-4a9f-b627-aa23c916d432",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "4NFLdvsjDhxikoXR",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "thread",
+        "operation": "addLabels",
+        "threadId": "={{ $('Gmail Trigger').item.json.threadId }}",
+        "labelIds": [
+          "Label_1219592729876627516"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -80,
+        224
+      ],
+      "id": "85d681e2-3007-41ea-9f2a-3a2223c8b4da",
+      "name": "Add label to thread",
+      "webhookId": "b52526d4-e49a-454e-96e7-c426c208e621",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "4NFLdvsjDhxikoXR",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=User email-{{ $('Gmail Trigger').item.json.snippet }}\nUser Subject-{{ $('Gmail Trigger').item.json.Subject }}",
+        "options": {
+          "systemMessage": "You are an email expert to send reply to customer emails.\nBe polite and resolve customer queries based on our product or services.\n\nOur company name is - HCL Tech Support where you as SDR respond to customer queries\n\nif you are not sure reply with I'll inform a real assistant will assist you.\n\nEnd a message or sign off with HCL AI Support"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        -368,
+        400
+      ],
+      "id": "670be71b-d4df-4504-9805-99cbc37df7ee",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        560
+      ],
+      "id": "0a129b01-54db-46cb-a4e7-7306050f6d47",
+      "name": "OpenRouter Chat Model2",
+      "credentials": {
+        "openRouterApi": {
+          "id": "YhFcDG2bPiG1JVL0",
+          "name": "OpenRouter account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Classifier": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Delete a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Add label to thread",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Reply to a message1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create a draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reply to a message1": {
+      "main": [
+        []
+      ]
+    },
+    "Create a draft": {
+      "main": [
+        []
+      ]
+    },
+    "OpenRouter Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Reply to a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "110e14d0-19fc-4eca-8367-7f293cd444c1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "df04dfdcfd8308fb2f7511936c4257c50fb3ccfe6c2accfa167ac93a7d31f678"
+  },
+  "id": "ofJw6UUJH7VUHCiY",
+  "tags": []
+}
