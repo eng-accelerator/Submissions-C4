@@ -10,3 +10,6 @@ Because the API Key I received to my e-mail is from OpenRouter - I used it for t
 
 *Day 03*: 
 https://huggingface.co/spaces/valacuhi/chatbotmx
+
+*Day 04*:
+see the attached screenshot of the Gmail automation (n8n) - classifier, reply to, draft - Day04-n8n-gmail-automation.png
