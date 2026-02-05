@@ -21,7 +21,7 @@ chatbot-app/
 ### Run steps 
 
 ```
-1. update .env file with the API key
+1. Create and update the .env file with the API key
 2. pip install -r requirements.txt
 3. streamlit run app.py
 ```
