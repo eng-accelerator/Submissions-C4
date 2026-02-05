@@ -1,0 +1,72 @@
+/* Chat */
+[data-testid="stChatMessage"] {
+    border-radius: 10px;
+    background-color: #1c2539;
+}
+
+.response-style-label {
+    color: rgb(132, 167, 249)
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background: #26272F;
+    background: linear-gradient(70deg, rgb(30, 32, 41) 30%, rgb(86, 95, 146) 78%);
+    border: 8px solid black;
+}
+
+
+
+[data-testid="stChatInput"] {
+    border: 2px solid #1c6cd5ae;
+    border-radius: 12px;
+}
+
+[data-testid="stChatInput"]>div {
+    border-radius: 12px;
+}
+
+
+
+[data-testid="stChatInput"]:focus-within {
+    border: 2px solid #5aa6fc;
+
+}
+
+[data-testid="stChatInput"]:focus-within>div {
+    border-color: rgba(0, 0, 0, 0);
+}
+
+
+button[aria-label="➕ New Chat"] {
+    background-color: #ff4b4b;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 0.6em 1.2em;
+}
+
+button[aria-label="➕ New Chat"]:hover {
+    background-color: #ff4b4b;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 0.6em 1.2em;
+}
+
+/* Targets all secondary buttons */
+button[data-testid="stBaseButton-secondary"] {
+    background-color: #100d1f !important;
+    color: white !important;
+    font-weight: bold !important;
+    border-radius: 10px !important;
+    padding: 0.6em 1.2em !important;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    min-width: 50px;
+}
+
+/* Optional: hover effect */
+button[data-testid="stBaseButton-secondary"]:hover {
+    background-color: #1f2346 !important;
+    border-color: #5aa6fc;
+}
