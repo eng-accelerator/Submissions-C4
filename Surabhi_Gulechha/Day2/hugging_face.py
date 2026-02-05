@@ -7,9 +7,9 @@ Original file is located at
     https://colab.research.google.com/drive/1XM08kZZlDjzq-f159IDHWV3Rmd6KmOJ9
 """
 
-!pip install gradio
+#!pip install gradio
 
-!pip install huggingface_hub
+#!pip install huggingface_hub
 
 from huggingface_hub import whoami
 from google.colab import userdata
