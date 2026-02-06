@@ -1,0 +1,105 @@
+Create a Web Application based on below given steps. Please use the attached image as a reference.
+Step 2: Set App Name and Purpose
+App Name: LinkedInScaler
+Description:
+An AI-powered app to generate LinkedIn posts based on topic, writing style, post category, and preferred content length.
+Step 3: Add Input Field – Main Topic
+Click Add Input → Text Input
+Configure:
+Label: Enter Main Topic / Theme
+Placeholder: e.g., AI in Marketing, Career Growth, Personal Branding
+Required: Yes
+Save the field as:
+Variable Name: topic
+Step 4: Add Dropdown – Writing Style
+Click Add Input → Dropdown
+Configure:
+Label: Select Writing Style
+Required: Yes
+Add these options:
+Professional
+Inspirational
+Educational
+Storytelling
+Conversational
+Promotional
+Save as:
+Variable Name: writing_style
+Step 5: Add Dropdown – Post Category
+Click Add Input → Dropdown
+Configure:
+Label: Select Post Category
+Required: Yes
+Add these options:
+Thought Leadership
+Personal Story
+Industry Insight
+Case Study
+Announcement
+How-To / Tips
+Career Advice
+Save as:
+Variable Name: post_category
+Step 6: Add Slider – Post Length
+Click Add Input → Slider
+Configure:
+Label: Select Post Length
+Required: Yes
+Set values:
+Min: Short
+Mid: Medium
+Max: Large
+Save as:
+Variable Name: post_length
+Once user clicks ‘Generate Post’ Button- send all the above parameters as POST request on this webhook URL- <URL>
+image.png
+image.png
+image.png
+image.png
+Gemini 2.5 Pro
+Ran for 60s
+lightbulb
+Thought for 33 seconds
+edit
+Edited 6 files
+metadata.json
+check_circle
+index.html
+check_circle
+index.tsx
+check_circle
+App.tsx
+check_circle
+types.ts
+check_circle
+constants.ts
+check_circle
+Checkpoint
+User
+Checkpoint
+Once the user clicks on "Generate Post" you will receive a Text response back from n8n. Create a ediatable textbox to display the text and user can edit the text inside that.
+Don't generate any post from your own
+Gemini 2.5 Pro
+Ran for 63s
+lightbulb
+Thought for 40 seconds
+Of course! I'll update the application to handle the response from the webhook and display it in an editable text area. Here are the changes:
+I've updated the app's logic. Now, when you click "Generate Post," the application will:
+Wait for the text response from the webhook.
+Once received, it will display the generated post in a new section below the form.
+This new section includes a large, editable text area, allowing you to refine the post directly on the page.
+This creates a seamless workflow from generation to editing.
+edit
+Edited 1 file
+App.tsx
+check_circle
+Checkpoint
+User
+Create a new button "Publish Now" below the preview textbox and send this edited text back to my n8n webhook URL as a POST request. URL-
+<URL>
+Gemini 2.5 Pro
+Ran for 50s
+lightbulb
+Thought for 19 seconds
+Of course! I'll add a "Publish Now" button that appears after you've generated your post. This will allow you to send your edited text to the new webhook URL.
+Here are the changes to the app:
