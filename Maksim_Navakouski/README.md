@@ -13,3 +13,7 @@ https://huggingface.co/spaces/valacuhi/chatbotmx
 
 *Day 04*:
 see the attached screenshot of the Gmail automation (n8n) - classifier, reply to, draft - Day04-n8n-gmail-automation.png
+
+*Day 07*:
+see the attached screenshot of the Basic RAG Assistant (colab + Gradio) - mx_Day07-assignment_3a.png
+
