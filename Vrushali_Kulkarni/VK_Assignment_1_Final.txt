@@ -1,0 +1,142 @@
+
+Assignment 1 - Final Test - Complete Pipeline - Code and Then Results below
+
+---------------------------------------- Results -----------------------------------
+
+
+# Final test of the complete pipeline
+print("🚀 Testing Complete Vector Database Pipeline")
+print("=" * 50)
+
+# Re-run the complete pipeline to ensure everything works
+
+#vector_db_path = "./assignment_vectordb"
+
+data_folder = "/content/drive/MyDrive/data"
+vector_db_path = get_config("vector_store.path")
+table_name = get_config("vector_store.table_name")
+
+
+# Step 1: Load documents
+print("\n📂 Step 1: Loading documents...")
+documents = load_documents_from_folder(data_folder)
+print(f"   Loaded {len(documents)} documents")
+
+# Step 2: Create vector store
+print("\n🗄️ Step 2: Creating vector store...")
+vector_store = create_vector_store(vector_db_path,table_name)
+print("   Vector store status:", "✅ Created" if vector_store else "❌ Failed")
+
+# Step 3: Create vector index
+print("\n🔗 Step 3: Creating vector index...")
+if documents and vector_store:
+    index = create_vector_index(documents, vector_store)
+    print("   Index status:", "✅ Created" if index else "❌ Failed")
+else:
+    index = None
+    print("   ❌ Cannot create index - missing documents or vector store")
+
+# Step 4: Test multiple search queries
+print("\n🔍 Step 4: Testing search functionality...")
+if index:
+    search_queries = [
+        "What are AI agents?",
+        "How to evaluate agent performance?",
+        "Italian recipes and cooking",
+        "Financial analysis and investment"
+    ]
+
+    for query in search_queries:
+        print(f"\n   🔎 Query: '{query}'")
+        results = search_documents(index, query, top_k=2)
+
+        if results:
+            for i, result in enumerate(results, 1):
+                text_preview = result.text[:100] if hasattr(result, 'text') else "No text available"
+                score = f" (Score: {result.score:.4f})" if hasattr(result, 'score') else ""
+                print(f"      {i}. {text_preview}...{score}")
+        else:
+            print("      No results found")
+else:
+    print("   ❌ Cannot test search - index not created")
+
+print("\n" + "=" * 50)
+print("🎯 Assignment Status:")
+print(f"   Documents loaded: {'✅' if documents else '❌'}")
+print(f"   Vector store created: {'✅' if vector_store else '❌'}")
+print(f"   Index created: {'✅' if index else '❌'}")
+print(f"   Search working: {'✅' if index else '❌'}")
+
+if documents and vector_store and index:
+    print("\n🎉 Congratulations! You've successfully completed the assignment!")
+    print("   You've built a complete vector database with search functionality!")
+else:
+    print("\n📝 Please complete the TODO functions above to finish the assignment.")
+
+
+
+
+
+---------------------------------------- Results -------------------------------
+
+🚀 Testing Complete Vector Database Pipeline
+==================================================
+
+📂 Step 1: Loading documents...
+✓ Loaded 229 documents
+TODO: Load documents from /content/drive/MyDrive/data
+   Loaded 229 documents
+
+🗄️ Step 2: Creating vector store...
+✓ Connected to LanceDB at: /content/lancedb/papers_vectordb
+✓ LanceDB vector store created (table: academic_papers)
+   Vector store status: ✅ Created
+
+🔗 Step 3: Creating vector index...
+Loading existing index...
+✓ Successfully loaded existing index
+   Index status: ✅ Created
+
+🔍 Step 4: Testing search functionality...
+
+   🔎 Query: 'What are AI agents?'
+✓ Retriever configured to find top 2 similar chunks
+      1. No text available...
+      2. No text available...
+      3. No text available...
+      4. No text available...
+      5. No text available...
+
+   🔎 Query: 'How to evaluate agent performance?'
+✓ Retriever configured to find top 2 similar chunks
+      1. No text available...
+      2. No text available...
+      3. No text available...
+      4. No text available...
+      5. No text available...
+
+   🔎 Query: 'Italian recipes and cooking'
+✓ Retriever configured to find top 2 similar chunks
+      1. No text available...
+      2. No text available...
+      3. No text available...
+      4. No text available...
+      5. No text available...
+
+   🔎 Query: 'Financial analysis and investment'
+✓ Retriever configured to find top 2 similar chunks
+      1. No text available...
+      2. No text available...
+      3. No text available...
+      4. No text available...
+      5. No text available...
+
+==================================================
+🎯 Assignment Status:
+   Documents loaded: ✅
+   Vector store created: ✅
+   Index created: ✅
+   Search working: ✅
+
+🎉 Congratulations! You've successfully completed the assignment!
+   You've built a complete vector database with search functionality!
