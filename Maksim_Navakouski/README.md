@@ -15,5 +15,6 @@ https://huggingface.co/spaces/valacuhi/chatbotmx
 see the attached screenshot of the Gmail automation (n8n) - classifier, reply to, draft - Day04-n8n-gmail-automation.png
 
 *Day 07*:
-see the attached screenshot of the Basic RAG Assistant (colab + Gradio) - mx_Day07-assignment_3a.png
-
+3a: see the attached screenshot of the Basic RAG Assistant (colab + Gradio) - mx_Day07-assignment_3a.png
+3b: see two attached screenshots of the Enhanced RAG Assistant (colab + Gradio) - mx_Day07-assignment_3b-1/2.png
+https://1abe23871e5bd76e2c.gradio.live/
