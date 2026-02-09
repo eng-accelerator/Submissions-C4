@@ -27,6 +27,15 @@ chatbot-app/
 ```
 ---
 
+
+## Day 5 class activity/assignment 
+```
+1. LinkedIn post generation app - https://ai.studio/apps/drive/1xGGkdzZLAgxolhe3StmapQoDbVlMdMss
+2. JSON to implement the backend for this - **ClassActivity_GoogleAIstudio_ui_n8n_backend.json** attched above
+```
+---
+
+
 ## Day 6 and 7 class activity/assignment 
 ```
 1. Google Drive URL - https://drive.google.com/drive/folders/1Y3FJBC39BtXbP23MfdYA0E68XqBjLB5A?usp=sharing
