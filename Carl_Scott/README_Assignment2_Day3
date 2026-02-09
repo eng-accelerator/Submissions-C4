@@ -1,0 +1,420 @@
+# Three files: requirements.txt, app.py & chat_utils.py
+
+""
+    requirements.txt
+""
+streamlit
+openai
+
+
+""
+    app.py
+""
+import streamlit as st
+import uuid
+import chat_utils
+import json
+from datetime import datetime
+
+# Page Configuration
+st.set_page_config(
+    page_title="Hey who are you?",
+    page_icon="🤖",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# Initialize Session State
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = chat_utils.load_chat_history()
+
+if "current_chat_id" not in st.session_state:
+    st.session_state.current_chat_id = None
+
+# Custom CSS
+st.markdown("""
+<style>
+    .stChatMessage {
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Helper to calculate duration
+def get_session_duration(start_time_iso):
+    if not start_time_iso:
+        return "N/A"
+    try:
+        start_time = datetime.fromisoformat(start_time_iso)
+        duration = datetime.now() - start_time
+        total_seconds = int(duration.total_seconds())
+        minutes = total_seconds // 60
+        seconds = total_seconds % 60
+        return f"{minutes}m {seconds}s"
+    except ValueError:
+        return "Invalid Time"
+
+# Sidebar
+with st.sidebar:
+    st.title("💬 Conversations")
+    
+    if st.button("+ New Chat", use_container_width=True, type="primary"):
+        st.session_state.current_chat_id = str(uuid.uuid4())
+        # Initialize new chat with created_at timestamp
+        if st.session_state.current_chat_id not in st.session_state.chat_history:
+             st.session_state.chat_history[st.session_state.current_chat_id] = {
+                 "created_at": datetime.now().isoformat(),
+                 "messages": []
+             }
+        st.rerun()
+
+    st.markdown("---")
+    
+    # Session Duration Box (only if active chat)
+    if st.session_state.current_chat_id and st.session_state.current_chat_id in st.session_state.chat_history:
+        current_chat_data = st.session_state.chat_history[st.session_state.current_chat_id]
+        # Handle migration edge case where migration hasn't happened yet in memory
+        if isinstance(current_chat_data, list):
+             created_at = datetime.now().isoformat() # Fallback
+        else:
+             created_at = current_chat_data.get("created_at")
+             
+        duration_str = get_session_duration(created_at)
+        st.info(f"⏱️ Session Duration: {duration_str}")
+
+    st.subheader("Chat History")
+
+    # Display list of chats
+    chat_ids = list(st.session_state.chat_history.keys())
+    
+    for c_id in reversed(chat_ids):
+        chat_data = st.session_state.chat_history.get(c_id)
+        if hasattr(chat_data, 'get'):
+             messages = chat_data.get("messages", [])
+        elif isinstance(chat_data, list):
+             messages = chat_data # Backward compatibility
+        else:
+             messages = []
+
+        if not messages:
+            title = "Empty Chat"
+        else:
+            first_msg = next((m['content'] for m in messages if m['role'] == 'user'), "New Chat")
+            title = (first_msg[:25] + '...') if len(first_msg) > 25 else first_msg
+        
+        col1, col2 = st.columns([0.8, 0.2])
+        with col1:
+            if st.button(title, key=f"btn_{c_id}", use_container_width=True):
+                st.session_state.current_chat_id = c_id
+                st.rerun()
+        with col2:
+            if st.button("🗑️", key=f"del_{c_id}"):
+                chat_utils.delete_chat(c_id)
+                del st.session_state.chat_history[c_id]
+                if st.session_state.current_chat_id == c_id:
+                    st.session_state.current_chat_id = None
+                st.rerun()
+
+    st.markdown("---")
+    st.subheader("⚙️ Settings")
+    is_dark_mode = st.toggle("Dark mode", value=True)
+    
+    if not is_dark_mode:
+        # Force Light Mode Styling via CSS injection
+        st.markdown("""
+        <style>
+            /* Main Backgrounds */
+            [data-testid="stAppViewContainer"] {
+                background-color: #ffffff;
+                color: #31333F;
+            }
+            [data-testid="stSidebar"] {
+                background-color: #f0f2f6;
+            }
+            [data-testid="stHeader"] {
+                background-color: rgba(255,255,255,0.9);
+            }
+            
+            /* Text Color override */
+            .stMarkdown, .stText, h1, h2, h3, h4, h5, h6, p, label, .stCaption {
+                color: #31333F !important;
+            }
+            
+            /* Buttons (Sidebar & Main) */
+            .stButton > button {
+                background-color: #ffffff !important;
+                color: #31333F !important;
+                border: 1px solid #d6d6d6 !important;
+            }
+            .stButton > button:hover {
+                border-color: #ff4b4b !important;
+                color: #ff4b4b !important;
+            }
+            /* Primary Button override */
+            .stButton > button[kind="primary"] {
+                background-color: #ff4b4b !important;
+                color: white !important;
+                border: none !important;
+            }
+
+            /* Inputs (Chat Input specifically) */
+            .stChatInput, .stChatInput > div {
+                background-color: #ffffff !important;
+                border-color: #d6d6d6 !important;
+            }
+            .stChatInput textarea {
+                background-color: #ffffff !important;
+                color: #31333F !important;
+                caret-color: #31333F !important;
+                border: 1px solid #d6d6d6 !important;
+            }
+            .stChatInput textarea::placeholder {
+                color: #666 !important;
+            }
+            [data-testid="stChatInputSubmitButton"] {
+                color: #31333F !important;
+                background-color: transparent !important;
+            }
+            [data-testid="stChatInputSubmitButton"]:hover {
+                 color: #ff4b4b !important;
+            }
+            
+            /* Expanders */
+            .streamlit-expanderHeader {
+                background-color: #f0f2f6 !important;
+                color: #31333F !important;
+            }
+            
+            /* Code blocks if any */
+            code {
+                color: #31333F !important;
+                background-color: #f0f2f6 !important;
+            }
+        </style>
+        """, unsafe_allow_html=True)
+    
+    if st.session_state.current_chat_id:
+        if st.button("🧹 Clear Current Chat"):
+            # Reset messages but keep created_at? Or reset time too?
+            # Usually strict clear keeps session, so let's keep session time.
+            if st.session_state.current_chat_id in st.session_state.chat_history:
+                # Ensure it's a dict
+                if isinstance(st.session_state.chat_history[st.session_state.current_chat_id], list):
+                    st.session_state.chat_history[st.session_state.current_chat_id] = {
+                        "created_at": datetime.now().isoformat(),
+                        "messages": []
+                    }
+                else:
+                    st.session_state.chat_history[st.session_state.current_chat_id]["messages"] = []
+                    
+            chat_utils.save_chat(st.session_state.current_chat_id, st.session_state.chat_history[st.session_state.current_chat_id])
+            st.rerun()
+
+# Main Content
+if not st.session_state.current_chat_id:
+    if not st.session_state.chat_history:
+        new_id = str(uuid.uuid4())
+        st.session_state.current_chat_id = new_id
+        st.session_state.chat_history[new_id] = {
+            "created_at": datetime.now().isoformat(),
+            "messages": []
+        }
+    else:
+        st.session_state.current_chat_id = list(st.session_state.chat_history.keys())[-1]
+
+current_id = st.session_state.current_chat_id
+current_data = st.session_state.chat_history.get(current_id)
+
+# Migration Check in Main Flow
+if isinstance(current_data, list):
+    current_messages = current_data
+else:
+    current_messages = current_data.get("messages", []) if current_data else []
+
+st.title("🤖 Hey who are you?")
+
+with st.expander("📝 Summarize Conversation"):
+    if st.button("Generate Summary"):
+        if not current_messages:
+            st.info("No messages to summarize.")
+        else:
+            with st.spinner("Summarizing..."):
+                summary_prompt = [
+                    {"role": "system", "content": "Summarize the following conversation concisely."},
+                    {"role": "user", "content": json.dumps(current_messages)}
+                ]
+                summary = chat_utils.get_chat_response(summary_prompt)
+                st.markdown(summary)
+
+for message in current_messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+        if "timestamp" in message:
+             st.caption(f"_{message['timestamp']}_")
+
+if prompt := st.chat_input("What is on your mind?"):
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    user_msg_obj = {"role": "user", "content": prompt, "timestamp": timestamp}
+    
+    # Add to state (handling list/dict structures)
+    if isinstance(st.session_state.chat_history[current_id], list):
+         # Normalize to dict on write if it was list
+         st.session_state.chat_history[current_id] = {
+             "created_at": datetime.now().isoformat(),
+             "messages": st.session_state.chat_history[current_id]
+         }
+    
+    st.session_state.chat_history[current_id]["messages"].append(user_msg_obj)
+    
+    with st.chat_message("user"):
+        st.markdown(prompt)
+        st.caption(f"_{timestamp}_")
+
+    with st.chat_message("assistant"):
+        message_placeholder = st.empty()
+        with st.spinner("Thinking..."):
+             response_text = chat_utils.get_chat_response(st.session_state.chat_history[current_id]["messages"])
+             message_placeholder.markdown(response_text)
+    
+    timestamp_bot = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    bot_msg_obj = {"role": "assistant", "content": response_text, "timestamp": timestamp_bot}
+    
+    st.session_state.chat_history[current_id]["messages"].append(bot_msg_obj)
+    chat_utils.save_chat(current_id, st.session_state.chat_history[current_id])
+
+
+    ""
+        chat_utils.py
+    ""
+    import json
+import os
+import streamlit as st
+from openai import OpenAI
+from datetime import datetime
+import glob
+
+# Directory to store chat files
+CHATS_DIR = "chats"
+CHAT_HISTORY_FILE = "chat_history.json" # Legacy file
+
+def get_openai_client():
+    """Configures and returns the OpenAI client for OpenRouter."""
+    # Try getting from environment variable first (standard for Docker/HF Spaces)
+    api_key = os.environ.get("OPENROUTER_API_KEY")
+    
+    # Fallback to streamlit secrets (local development)
+    if not api_key:
+        try:
+            api_key = st.secrets.get("OPENROUTER_API_KEY")
+        except FileNotFoundError:
+            pass # No secrets file found
+            
+    if not api_key:
+        st.error("OpenRouter API Key not found. Please set OPENROUTER_API_KEY in Environment Variables or .streamlit/secrets.toml")
+        return None
+    
+    return OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=api_key
+    )
+
+def migrate_legacy_history():
+    """Migrates monolithic chat_history.json to individual files in chats/."""
+    if not os.path.exists(CHATS_DIR):
+        os.makedirs(CHATS_DIR)
+
+    if os.path.exists(CHAT_HISTORY_FILE):
+        try:
+            with open(CHAT_HISTORY_FILE, "r") as f:
+                data = json.load(f)
+            
+            for chat_id, content in data.items():
+                # Normalize legacy format if needed (should already be somewhat standard from previous step, but be safe)
+                if isinstance(content, list):
+                    chat_data = {
+                        "created_at": datetime.now().isoformat(),
+                        "messages": content
+                    }
+                else:
+                    chat_data = content
+                
+                # Save to new location
+                save_chat(chat_id, chat_data)
+            
+            # Rename legacy file to backup
+            os.rename(CHAT_HISTORY_FILE, f"{CHAT_HISTORY_FILE}.bak")
+            print(f"Migrated {len(data)} chats to {CHATS_DIR}/")
+            
+        except json.JSONDecodeError:
+            print("Error reading legacy chat history file.")
+        except Exception as e:
+            print(f"Migration error: {e}")
+
+def load_chat_history():
+    """Loads all chat histories from the chats/ directory."""
+    # Ensure directory exists
+    if not os.path.exists(CHATS_DIR):
+        os.makedirs(CHATS_DIR)
+        
+    # Check for legacy file and migrate if present
+    if os.path.exists(CHAT_HISTORY_FILE):
+        migrate_legacy_history()
+
+    all_chats = {}
+    chat_files = glob.glob(os.path.join(CHATS_DIR, "*.json"))
+    
+    for file_path in chat_files:
+        try:
+            filename = os.path.basename(file_path)
+            chat_id = os.path.splitext(filename)[0]
+            
+            with open(file_path, "r") as f:
+                chat_data = json.load(f)
+                all_chats[chat_id] = chat_data
+        except Exception as e:
+            print(f"Error loading chat {file_path}: {e}")
+            
+    return all_chats
+
+def save_chat(chat_id, chat_data):
+    """Saves a specific chat to its own JSON file."""
+    if not os.path.exists(CHATS_DIR):
+        os.makedirs(CHATS_DIR)
+        
+    file_path = os.path.join(CHATS_DIR, f"{chat_id}.json")
+    with open(file_path, "w") as f:
+        json.dump(chat_data, f, indent=4)
+
+def delete_chat(chat_id):
+    """Deletes a specific chat session file."""
+    file_path = os.path.join(CHATS_DIR, f"{chat_id}.json")
+    if os.path.exists(file_path):
+        os.remove(file_path)
+        return True
+    return False
+
+def get_chat_response(messages, model="openai/gpt-oss-120b"):
+    """Sends messages to the LLM and returns the response content."""
+    client = get_openai_client()
+    if not client:
+        return "Error: API Client not configured."
+
+    try:
+        # Strip internal keys like 'timestamp' before sending to API if necessary
+        api_messages = [{"role": m["role"], "content": m["content"]} for m in messages]
+
+        completion = client.chat.completions.create(
+            extra_headers={
+                "HTTP-Referer": "https://localhost:8501", # Optional: for OpenRouter rankings
+                "X-Title": "Streamlit Chatbot", # Optional: for OpenRouter rankings
+            },
+            model=model,
+            messages=api_messages
+        )
+        return completion.choices[0].message.content
+    except Exception as e:
+        return f"Error communicating with API: {str(e)}"
+
+                              

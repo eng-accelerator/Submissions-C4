@@ -1,0 +1,170 @@
+{
+  "name": "AutogenLinkedin",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Topic-  {{ $json.body.topic }}\nWriting Style- {{ $json.body.writing_style }}\nPost Category- {{ $json.body.post_category }}\nLength- {{ $json.body.post_length }}\n\nUse these paramters and system instruction to generate a response ",
+        "options": {
+          "systemMessage": "=Persona:\nYou are an expert LinkedIn Ghostwriter who has written 2,000+ viral posts for CEOs, founders, creators, and tech professionals. You deeply understand LinkedIn algorithms, storytelling, hooks, audience psychology, and content formats that drive millions of views. You specialise in creating scroll-stopping hooks, emotional storytelling, authority-building insights, and CTAs that spark engagement.\n\nTask:\nCreate a viral-style LinkedIn post based on:\nUse user messsage to get the details on Topic, style, length etc for the post.\n\nDon't use \"# and *\"\" for headers and in the post. Don't use em-dashes \"--\"\n\nYour job is to craft a LinkedIn post that maximizes reach, engagement, and shares through strong hooks, relatable narratives, crisp formatting, and powerful CTAs.\n\nContext:\nThe post should feel like it was written by a top LinkedIn creator. It must capture attention in the first 2–3 seconds, use pattern-interrupt techniques, create emotional resonance, and deliver real value. Add insights, examples, frameworks, or micro-stories depending on the post type. The goal is to trigger comments, saves, and reposts.\n\nFormat:\nFollow this exact structure:\n\nDon't use \"# and *\"\" for headers and in the post. Don't use em-dashes \"--\"\n\nHook (1–2 lines, punchy, curiosity-building, scroll-stopping)\n\nBody (story, insight, or breakdown depending on the post type)\n\nValue Section (actionable takeaways, lessons, or frameworks)\n\nCTA (ask a question that encourages comments, or invite people to share their thoughts)\n\nKeep paragraphs short (1–2 lines max).\n\nUse simple English, no jargon.\n\nAdd spacing for readability.\n\nDon't use # and * for headers. \n\nStricly Don't use em-dashes \n\nAdd few hashtags related to that topic maximum 4 or 5\n\nTone:\nConversational, bold, authoritative, and engaging—like top LinkedIn creators. No fluff. Every line should deliver value, emotion, or curiosity.\n\nOutput:\nA polished viral-style LinkedIn post ready to publish.\nDon't use em dashes. I want plain english post without em dashes "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -176,
+        -96
+      ],
+      "id": "9d0176f6-0096-4ceb-ac65-e932183f29b3",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        48
+      ],
+      "id": "e7a68127-2e66-431f-a3ab-8f14af80b3c8",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "wzr8mEOs174so6Qo",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        176,
+        -96
+      ],
+      "id": "2dd98126-a495-4cba-89d4-6de16b71df4e",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "c4e6b6b8-b03a-411c-ad77-bad654b09929",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -400,
+        192
+      ],
+      "id": "901e50cc-93ba-4ce8-803e-472bf889dbb3",
+      "name": "Webhook1",
+      "webhookId": "c4e6b6b8-b03a-411c-ad77-bad654b09929"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "89faf9e4-f537-49d4-890e-19afb4cf0a28",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -416,
+        -96
+      ],
+      "id": "6f2250b4-7d61-4a70-bb76-2ceb31aeea82",
+      "name": "Webhook-Create",
+      "webhookId": "89faf9e4-f537-49d4-890e-19afb4cf0a28"
+    },
+    {
+      "parameters": {
+        "person": "tSR_MnqMG-",
+        "text": "={{ $json.body.postContent }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        192
+      ],
+      "id": "6cc0c2c1-0319-4fa1-9d69-ca13b3b420eb",
+      "name": "Create a post",
+      "credentials": {
+        "linkedInOAuth2Api": {
+          "id": "brNESvXMXkXYBoYy",
+          "name": "LinkedIn account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook-Create": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Create a post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "4f4ba8d6-9fa9-4dba-846b-5a08c04071c5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3e98fcf6c657722afcd0932343945fc67fe4d6fb9e4eb90a542b870a17677011"
+  },
+  "id": "z9HziFyd8ZeEOUnf83t1-",
+  "tags": []
+}

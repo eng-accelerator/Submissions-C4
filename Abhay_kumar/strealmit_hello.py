@@ -94,7 +94,7 @@ if 'current_chat_id' not in st.session_state:
 # Initialize OpenAI client
 client = OpenAI(
   base_url="https://openrouter.ai/api/v1",
-  api_key="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",
+  api_key= <api_key>,
   default_headers={
         "HTTP-Referer": "http://localhost:8501",  # Optional: shows on OpenRouter rankings
         "X-Title": "My ChatBot",                  # Optional: shows on OpenRouter rankings
@@ -192,3 +192,4 @@ if prompt := st.chat_input("Type your message here..."):
 
     except Exception as e:
         st.error(f"Error: {str(e)}")
+

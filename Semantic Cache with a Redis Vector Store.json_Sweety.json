@@ -1,0 +1,643 @@
+{
+  "name": "Semantic Cache with a Redis Vector Store",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "### Tuning the Cache\nAdjust the `distanceThreshold` in the `Analyze results from store` node to control cache sensitivity:\n- **Lower threshold** (e.g., 0.2): More strict matching, fewer false positives, more LLM calls\n- **Higher threshold** (e.g., 0.5): More lenient matching, more cache hits, potential for less relevant responses",
+        "height": 136,
+        "width": 736,
+        "color": 5
+      },
+      "id": "73b89a5c-0215-49dd-8523-979a479bc3b3",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -992,
+        704
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "id": "5b6bb3bf-d710-469d-aef2-d2a5671da660",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        -80,
+        528
+      ],
+      "typeVersion": 1.2,
+      "credentials": {
+        "openAiApi": {
+          "id": "LBIIDFxlRGe0eHsy",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "f526b8a8-e5a3-48e0-aedf-3713069da702",
+      "name": "Redis Chat Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "position": [
+        96,
+        528
+      ],
+      "typeVersion": 1.5,
+      "credentials": {
+        "redis": {
+          "id": "vvDKeb9VTFhdTvzp",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseMode": "responseNodes"
+        }
+      },
+      "id": "61e435e9-6bfd-49d3-b829-d8dc30576683",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "position": [
+        -1056,
+        320
+      ],
+      "webhookId": "113bee32-fc5f-4b90-98f0-dfad39a0d1c1",
+      "typeVersion": 1.4
+    },
+    {
+      "parameters": {
+        "jsCode": "// Modify this to tweak the ratio between false positives and false negatives\nconst distanceThreshold = 0.3; \n// Step 1. - find all documents that score below the threshold\nconst allMatches = $input.all().filter(item => item.json.score < distanceThreshold);\n// Step 2. - choose the one with the best score\nreturn allMatches.length > 1 ? allMatches.reduce((min, item) => item.json.score < min.json.score ? item : min) : allMatches;\n// AT THIS POINT ONLY ONE (OR ZERO) DOCUMENTS WOULD PASS\n// 1 DOCUMENT - document with highest score, above the score threshold (cache hit)\n// 0 DOCUMENTS - none of the documents are above the score threshold (cache miss)"
+      },
+      "id": "070f9095-e850-41f8-9eba-35ec60d88893",
+      "name": "Analyze results from store",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        -496,
+        320
+      ],
+      "executeOnce": true,
+      "typeVersion": 2,
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "mode": "load",
+        "redisIndex": {
+          "__rl": true,
+          "mode": "list",
+          "value": "chat_cache"
+        },
+        "prompt": "={{ $json.chatInput }}",
+        "options": {}
+      },
+      "id": "65cb4032-1930-46d1-8afa-70161b177601",
+      "name": "Check for similar prompts",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreRedis",
+      "position": [
+        -832,
+        320
+      ],
+      "typeVersion": 1.3,
+      "credentials": {
+        "redis": {
+          "id": "vvDKeb9VTFhdTvzp",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "message": "={{ $json.document.metadata.reply }}",
+        "waitUserReply": false,
+        "options": {}
+      },
+      "id": "1778a136-aef6-4bea-b5bf-f147ced1affe",
+      "name": "Respond to Chat (from semantic cache)",
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "alwaysOutputData": false,
+      "webhookId": "994acd18-60e7-48fe-a8d8-e447b00b0ea0"
+    },
+    {
+      "parameters": {
+        "message": "={{ $json.metadata.reply }}",
+        "waitUserReply": false,
+        "options": {}
+      },
+      "id": "1e28afba-3b97-4df5-8285-d71126b8a731",
+      "name": "Respond to Chat (from LLM)",
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "position": [
+        800,
+        320
+      ],
+      "typeVersion": 1,
+      "webhookId": "c84e28ac-59eb-46ef-8cda-c14970200f76"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "options": {
+          "systemMessage": "You are a helpful assistant.",
+          "maxIterations": 10
+        }
+      },
+      "id": "bcbb40fc-1af9-4602-9e9f-8f31a9daba0f",
+      "name": "LLM Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        -48,
+        320
+      ],
+      "typeVersion": 1.8
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "redisIndex": {
+          "__rl": true,
+          "mode": "list",
+          "value": "chat_cache",
+          "cachedResultName": "chat_cache"
+        },
+        "options": {
+          "overwriteDocuments": true
+        }
+      },
+      "id": "217581b3-1f71-4b74-8cf0-31089d38c7ac",
+      "name": "Store entry in cache",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreRedis",
+      "position": [
+        336,
+        320
+      ],
+      "typeVersion": 1.3,
+      "credentials": {
+        "redis": {
+          "id": "vvDKeb9VTFhdTvzp",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $('When chat message received').item.json.chatInput }}",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "reply",
+                "value": "={{ $json.output }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "5b8ff0ad-1c48-4526-be32-6eb7dfca6a5b",
+      "name": "Add response as metadata",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "position": [
+        432,
+        528
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "65bd8c18-38b9-4b8d-8a6d-b2a9231043ab",
+      "name": "Recursive Character Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "position": [
+        528,
+        704
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### Embedding model\nObviously using your own model to calculate the embeddings would not only increase performance but may also drastically reduce the costs.\n\nEven with the existing popular models though calling an embedding model is still much more cheaper than calling the chat model.",
+        "height": 152,
+        "width": 576,
+        "color": 7
+      },
+      "id": "2b8fabb5-65b3-4bb2-a75c-4c711cbfdd43",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        320,
+        0
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c59204e1-85b1-4d40-89ca-04718c693b36",
+              "operator": {
+                "type": "object",
+                "operation": "exists",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.document }}",
+              "rightValue": ""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d45b3406-987f-4e93-85bd-67a8be74a066",
+      "name": "Is this a cache hit?",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        -272,
+        320
+      ],
+      "typeVersion": 2.2,
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "2a44a511-6bf7-4eb1-b500-a055199e62c2",
+      "name": "Embeddings HuggingFace Inference",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "position": [
+        -832,
+        512
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "BRVjp1QIcujzNqSx",
+          "name": "HuggingFaceApi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "94a11e40-8c50-4d5e-be75-8db1d04105c5",
+      "name": "Embeddings HuggingFace Inference1",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "position": [
+        288,
+        528
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "BRVjp1QIcujzNqSx",
+          "name": "HuggingFaceApi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "redisIndex": {
+          "__rl": true,
+          "mode": "list",
+          "value": "chat_cache",
+          "cachedResultName": "chat_cache"
+        },
+        "options": {
+          "overwriteDocuments": false
+        }
+      },
+      "id": "8f9f96ee-b9f5-4f79-a525-872c6d082986",
+      "name": "Initialize Redis store",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreRedis",
+      "position": [
+        -1424,
+        544
+      ],
+      "typeVersion": 1.3,
+      "credentials": {
+        "redis": {
+          "id": "vvDKeb9VTFhdTvzp",
+          "name": "Redis account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $('Click to initialize').item.json.question }}",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "reply",
+                "value": "={{ $('Click to initialize').item.json.answer }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "01c902f5-ea2c-4398-8f2b-2e793e66cae5",
+      "name": "Process sample data",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "position": [
+        -1296,
+        704
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "5f274f44-d9b0-48d3-9acd-99f0800588d1",
+      "name": "Use Huggingface for embeddings",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsHuggingFaceInference",
+      "position": [
+        -1424,
+        720
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "huggingFaceApi": {
+          "id": "BRVjp1QIcujzNqSx",
+          "name": "HuggingFaceApi account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "ee489373-2a46-47f9-acdf-821a1725fe77",
+      "name": "Recursive Character Text Splitter1",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "position": [
+        -1200,
+        896
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Manually run this is check for similar prompts gives an error that it cant find the index",
+        "height": 136,
+        "width": 150,
+        "color": 5
+      },
+      "id": "c02b7d92-801c-486d-a806-8673c765facc",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1600,
+        704
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {},
+      "id": "f0ebbe76-36b8-4a45-bcfb-c5d88e8dd1e6",
+      "name": "Click to initialize",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        -1616,
+        544
+      ],
+      "typeVersion": 1
+    }
+  ],
+  "pinData": {
+    "Click to initialize": [
+      {
+        "json": {
+          "answer": "Hi",
+          "question": "Hello, what can i do for you"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "LLM Agent": {
+      "main": [
+        [
+          {
+            "node": "Store entry in cache",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "LLM Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "LLM Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process sample data": {
+      "ai_document": [
+        [
+          {
+            "node": "Initialize Redis store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is this a cache hit?": {
+      "main": [
+        [
+          {
+            "node": "Respond to Chat (from semantic cache)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LLM Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store entry in cache": {
+      "main": [
+        [
+          {
+            "node": "Respond to Chat (from LLM)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add response as metadata": {
+      "ai_document": [
+        [
+          {
+            "node": "Store entry in cache",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check for similar prompts": {
+      "main": [
+        [
+          {
+            "node": "Analyze results from store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze results from store": {
+      "main": [
+        [
+          {
+            "node": "Is this a cache hit?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Check for similar prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Use Huggingface for embeddings": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Initialize Redis store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings HuggingFace Inference": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Check for similar prompts",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings HuggingFace Inference1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Store entry in cache",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Add response as metadata",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter1": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Process sample data",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Click to initialize": {
+      "main": [
+        [
+          {
+            "node": "Initialize Redis store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "86df7ee0-75c5-4f14-accf-ef1fde453653",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7ced0ea36fb358e6e27dfd4e1ebcb348b2972942cae4ed9c81f04bffb5f0343d"
+  },
+  "id": "vndA2wqeU-uzMA1QmZbu-",
+  "tags": []
+}

@@ -1,0 +1,218 @@
+{
+  "name": "AutogenLinkedin",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Topic-  {{ $json.body.topic }}\nWriting Style- {{ $json.body.style }}\nPost Category- {{ $json.body.category }}\nLength- {{ $json.body.length }}\n\nUse these paramters and system instruction to generate a response ",
+        "options": {
+          "systemMessage": "=Persona:\nYou are an expert LinkedIn Ghostwriter who has written 2,000+ viral posts for CEOs, founders, creators, and tech professionals. You deeply understand LinkedIn algorithms, storytelling, hooks, audience psychology, and content formats that drive millions of views. You specialise in creating scroll-stopping hooks, emotional storytelling, authority-building insights, and CTAs that spark engagement.\n\nTask:\nCreate a viral-style LinkedIn post based on:\nUse user messsage to get the details on Topic, style, length etc for the post.\n\nDon't use \"# and *\"\" for headers and in the post. Don't use em-dashes \"--\"\n\nYour job is to craft a LinkedIn post that maximizes reach, engagement, and shares through strong hooks, relatable narratives, crisp formatting, and powerful CTAs.\n\nContext:\nThe post should feel like it was written by a top LinkedIn creator. It must capture attention in the first 2–3 seconds, use pattern-interrupt techniques, create emotional resonance, and deliver real value. Add insights, examples, frameworks, or micro-stories depending on the post type. The goal is to trigger comments, saves, and reposts.\n\nFormat:\nFollow this exact structure:\n\nDon't use \"# and *\"\" for headers and in the post. Don't use em-dashes \"--\"\n\nHook (1–2 lines, punchy, curiosity-building, scroll-stopping)\n\nBody (story, insight, or breakdown depending on the post type)\n\nValue Section (actionable takeaways, lessons, or frameworks)\n\nCTA (ask a question that encourages comments, or invite people to share their thoughts)\n\nKeep paragraphs short (1–2 lines max).\n\nUse simple English, no jargon.\n\nAdd spacing for readability.\n\nDon't use # and * for headers. \n\nStricly Don't use em-dashes \n\nAdd few hashtags related to that topic maximum 4 or 5\n\nTone:\nConversational, bold, authoritative, and engaging—like top LinkedIn creators. No fluff. Every line should deliver value, emotion, or curiosity.\n\nOutput:\nA polished viral-style LinkedIn post ready to publish.\nDon't use em dashes. I want plain english post without em dashes "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        240,
+        0
+      ],
+      "id": "c47adc2b-3b1b-4209-b383-0003a2f2e8f6",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        160,
+        144
+      ],
+      "id": "e634135e-7549-416f-83c2-d12331d70b95",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "GRWTuhlcN1ucJ2cf",
+          "name": "OpenRouter account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        592,
+        0
+      ],
+      "id": "e72abca1-a2cc-4977-9c40-ede761b5e9ce",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "c4e6b6b8-b03a-411c-ad77-bad654b09929",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        16,
+        288
+      ],
+      "id": "87684785-b61f-4814-a114-c6d2c2cef38f",
+      "name": "Webhook1",
+      "webhookId": "c4e6b6b8-b03a-411c-ad77-bad654b09929"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "89faf9e4-f537-49d4-890e-19afb4cf0a28",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8685cf8d-b34e-42e2-87d3-c4c8dbc442ab",
+      "name": "Webhook-Create",
+      "webhookId": "89faf9e4-f537-49d4-890e-19afb4cf0a28"
+    },
+    {
+      "parameters": {
+        "person": "L00igzMlge",
+        "text": "={{ $json.body.content }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [
+        224,
+        288
+      ],
+      "id": "7fc0a97d-e474-40a4-8594-e8fd475c7a47",
+      "name": "Create a post",
+      "credentials": {
+        "linkedInOAuth2Api": {
+          "id": "EJmTqiBVQHBofllW",
+          "name": "LinkedIn account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook1": [
+      {
+        "json": {
+          "headers": {
+            "host": "sweetysharma.app.n8n.cloud",
+            "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+            "content-length": "1417",
+            "accept": "*/*",
+            "accept-encoding": "gzip, br",
+            "accept-language": "en-US,en;q=0.9",
+            "cdn-loop": "cloudflare; loops=1; subreqs=1",
+            "cf-connecting-ip": "2607:fb92:681:68df:2d9e:9ff4:2c4e:6480",
+            "cf-ew-via": "15",
+            "cf-ipcountry": "US",
+            "cf-ray": "9c9cc47ca5398ea3-LAX",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "cf-worker": "n8n.cloud",
+            "content-type": "application/json",
+            "origin": "https://6395khtji0jj44bqzalmhh8en8tgx2gflewwxvkm8gmubmh1eh-h864888888.scf.usercontent.goog",
+            "priority": "u=1, i",
+            "sec-ch-ua": "\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Google Chrome\";v=\"144\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"macOS\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "2607:fb92:681:68df:2d9e:9ff4:2c4e:6480, 162.158.91.110",
+            "x-forwarded-host": "sweetysharma.app.n8n.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "traefik-prod-users-gwc-58-84cbd975f7-5lvvt",
+            "x-is-trusted": "yes",
+            "x-real-ip": "2607:fb92:681:68df:2d9e:9ff4:2c4e:6480"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "content": "AI will change how you learn and grow in your career more than any other tool in the next decade.\n\nHere’s why.\n\nIn education, AI is no longer just a futuristic concept. It’s transforming personalized learning by adapting to how you absorb information, pinpointing your weaknesses, and accelerating skill mastery.\n\nImagine having a mentor who never sleeps, instantly analyzes your progress, and customizes lessons just for you. That’s AI in education today. It makes learning efficient and tailored to your career goals.\n\nBut there’s more. AI helps you stay relevant in a fast-changing job market by recommending which new skills will be most valuable. It’s like having a career coach predicting which capabilities make you future-proof.\n\nIf you want to succeed, you can’t afford to ignore AI tools that boost learning speed, retention, and application.\n\nHere’s how to get ahead:\n\n- Embrace AI-powered learning platforms to tailor your skill development.\n\n- Use AI-driven assessments to identify gaps and track progress real-time.\n\n- Stay curious about new tools that can enhance your knowledge delivery.\n\n- Combine AI insights with hands-on practice to turn learning into career growth.\n\nHow are you using AI to upgrade your skills? Or what worries you about AI and education? Share your thoughts below.\n\n#AIinEducation #CareerGrowth #FutureOfWork #LifelongLearning"
+          },
+          "webhookUrl": "https://sweetysharma.app.n8n.cloud/webhook-test/c4e6b6b8-b03a-411c-ad77-bad654b09929",
+          "executionMode": "test"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook-Create": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Create a post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "35f16084-d166-450d-b2d7-e6f4f44c2f20",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7ced0ea36fb358e6e27dfd4e1ebcb348b2972942cae4ed9c81f04bffb5f0343d"
+  },
+  "id": "FjU1RBwmdA5RZapBDkhdY",
+  "tags": []
+}
