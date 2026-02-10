@@ -44,3 +44,44 @@ chatbot-app/
 
 ```
 ---
+
+## Day 8 class activity/assignment 
+
+```
+from transformers import AutoModelForSequenceClassification
+import torch
+checkpoint = "distilbert-base-uncased-finetuned-sst-2-english"
+model = AutoModelForSequenceClassification.from_pretrained(checkpoint)
+outputs = model(**inputs)
+print("--------SHAPE OF LOGIT TENSOR--------")
+print(outputs.logits.shape)
+print("\n\n--------LOGIT TENSOR--------")
+print(outputs.logits)
+predictions = torch.nn.functional.softmax(outputs.logits, dim=-1)
+predictions = torch.argmax(predictions, dim=1)
+print("\n\n--------PREDICTIONS--------")
+print(predictions) # os one, c++ one
+
+print("\n\n--------SENTIMENT TO ID mapping --------")
+print(model.config.id2label)
+```
+### console output  ###
+```
+Loading weights: 100%
+ 104/104 [00:00<00:00, 438.42it/s, Materializing param=pre_classifier.weight]
+--------SHAPE OF LOGIT TENSOR--------
+torch.Size([2, 2])
+
+--------LOGIT TENSOR--------
+tensor([[-4.3357,  4.6875],
+        [ 4.6717, -3.7884]], grad_fn=<AddmmBackward0>)
+
+--------PREDICTIONS--------
+tensor([1, 0])
+
+--------SENTIMENT TO ID mapping --------
+
+{0: 'NEGATIVE', 1: 'POSITIVE'}
+
+```
+---
