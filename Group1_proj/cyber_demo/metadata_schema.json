@@ -1,0 +1,42 @@
+{
+  "syslog_large.csv": [
+    "timestamp",
+    "host",
+    "src_ip",
+    "dst_ip",
+    "protocol",
+    "severity",
+    "action",
+    "event"
+  ],
+  "cve_data.json": [
+    "cve_id",
+    "published_date",
+    "cvss_base",
+    "description",
+    "affected_products"
+  ],
+  "vuln_scan.csv": [
+    "host",
+    "issue_id",
+    "severity",
+    "issue",
+    "finding",
+    "remediation"
+  ],
+  "incident_alerts.csv": [
+    "alert_id",
+    "timestamp",
+    "src",
+    "tgt",
+    "type",
+    "recommendation"
+  ],
+  "policy_checks.csv": [
+    "host",
+    "policy_id",
+    "standard",
+    "status",
+    "detail"
+  ]
+}

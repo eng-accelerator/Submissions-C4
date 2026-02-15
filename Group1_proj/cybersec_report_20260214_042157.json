@@ -1,0 +1,291 @@
+{
+  "generated_at": "2026-02-14T04:21:57.540559",
+  "audit_trail": [
+    {
+      "timestamp": "2026-02-14T04:21:33.650737",
+      "action": "threat_detection_start",
+      "details": {
+        "alert": "Brute force attack detected on port 22 from 122.161.239.59"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:33.651630",
+      "action": "rag_query_start",
+      "details": {
+        "query": "Brute force attack detected on port 22 from 122.161.239.59",
+        "collection": "logs",
+        "top_k": 5
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:34.596336",
+      "action": "rag_query_success",
+      "details": {
+        "collection": "logs",
+        "results_count": 0
+      },
+      "result": []
+    },
+    {
+      "timestamp": "2026-02-14T04:21:34.596807",
+      "action": "rag_query_start",
+      "details": {
+        "query": "Brute force attack detected on port 22 from 122.161.239.59",
+        "collection": "incident",
+        "top_k": 5
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:35.039267",
+      "action": "rag_query_success",
+      "details": {
+        "collection": "incident",
+        "results_count": 0
+      },
+      "result": []
+    },
+    {
+      "timestamp": "2026-02-14T04:21:35.039588",
+      "action": "threat_detection_complete",
+      "details": {
+        "timestamp": "2026-02-14T04:21:35.039573",
+        "alert": "Brute force attack detected on port 22 from 122.161.239.59",
+        "threat_level": "UNVERIFIED",
+        "retrieved_logs": [],
+        "retrieved_incidents": [],
+        "analysis": null,
+        "evidence_summary": "No similar logs or incidents found in vector store",
+        "recommendations": []
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:35.040148",
+      "action": "cve_enrichment_start",
+      "details": {
+        "vulnerability": "Weak cipher suite vulnerability in TLS implementation"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:35.040280",
+      "action": "rag_query_start",
+      "details": {
+        "query": "Weak cipher suite vulnerability in TLS implementation",
+        "collection": "cve",
+        "top_k": 8
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:35.421009",
+      "action": "rag_query_success",
+      "details": {
+        "collection": "cve",
+        "results_count": 0
+      },
+      "result": []
+    },
+    {
+      "timestamp": "2026-02-14T04:21:35.421414",
+      "action": "cve_enrichment_complete",
+      "details": {
+        "timestamp": "2026-02-14T04:21:35.421386",
+        "vulnerability": "Weak cipher suite vulnerability in TLS implementation",
+        "related_cves": [],
+        "cve_count": 0,
+        "affected_products": [],
+        "max_severity": 0.0,
+        "analysis": "No related CVEs found in vector store - vulnerability may be novel or internal",
+        "confidence": "LOW"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:35.422646",
+      "action": "vuln_analysis_start",
+      "details": {
+        "host": "114.210.246.246"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:35.422976",
+      "action": "rag_query_start",
+      "details": {
+        "query": "vulnerability scan on 114.210.246.246",
+        "collection": "vuln",
+        "top_k": 5
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:35.799557",
+      "action": "rag_query_success",
+      "details": {
+        "collection": "vuln",
+        "results_count": 0
+      },
+      "result": []
+    },
+    {
+      "timestamp": "2026-02-14T04:21:35.799820",
+      "action": "vuln_analysis_complete",
+      "details": {
+        "timestamp": "2026-02-14T04:21:35.799793",
+        "host": "114.210.246.246",
+        "vulnerabilities_found": 0,
+        "vulnerability_details": [],
+        "severity_breakdown": {
+          "CRITICAL": 0,
+          "HIGH": 0,
+          "MEDIUM": 0,
+          "LOW": 0
+        },
+        "remediation_required": [],
+        "analysis": "No vulnerabilities found for 114.210.246.246 in vector store"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:35.800681",
+      "action": "playbook_generation_start",
+      "details": {
+        "threat": "Brute force attack",
+        "severity": "HIGH"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:35.800916",
+      "action": "rag_query_start",
+      "details": {
+        "query": "Brute force attack",
+        "collection": "incident",
+        "top_k": 5
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:36.119444",
+      "action": "rag_query_success",
+      "details": {
+        "collection": "incident",
+        "results_count": 0
+      },
+      "result": []
+    },
+    {
+      "timestamp": "2026-02-14T04:21:36.119761",
+      "action": "rag_query_start",
+      "details": {
+        "query": "remediation for Brute force attack",
+        "collection": "policy",
+        "top_k": 5
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:36.494397",
+      "action": "rag_query_success",
+      "details": {
+        "collection": "policy",
+        "results_count": 0
+      },
+      "result": []
+    },
+    {
+      "timestamp": "2026-02-14T04:21:36.495055",
+      "action": "rag_query_start",
+      "details": {
+        "query": "Brute force attack",
+        "collection": "vuln",
+        "top_k": 5
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:36.841161",
+      "action": "rag_query_success",
+      "details": {
+        "collection": "vuln",
+        "results_count": 0
+      },
+      "result": []
+    },
+    {
+      "timestamp": "2026-02-14T04:21:57.201177",
+      "action": "playbook_generation_complete",
+      "details": {
+        "timestamp": "2026-02-14T04:21:36.841473",
+        "threat": "Brute force attack",
+        "severity": "HIGH",
+        "incident_context": [],
+        "policy_context": [],
+        "playbook_steps": "### Cybersecurity Remediation Playbook for Brute Force Attack\n\n#### Threat: Brute Force Attack\n#### Severity: High\n\n#### Context:\n- **Similar Incidents:** No historical data\n- **Relevant Policies:** None found\n- **Related Vulnerabilities:** None found\n\n---\n\n### 1. Immediate Actions (0-1 hour)\n\n#### a. Detect and Confirm the Attack\n- Monitor and analyze system logs and authentication logs for any unusual failed login attempts that could indicate a brute force attack.\n- Utilize Intrusion Detection Systems (IDS) to identify abnormal traffic patterns or high volumes of authentication requests.\n\n#### b. Contain the Attack\n- Temporarily block IP addresses that are sourcing the excessive authentication requests, if identifiable.\n- Implement CAPTCHA on login pages to differentiate between human users and automated scripts.\n\n#### c. Communicate\n- Inform the IT security team and relevant stakeholders about the ongoing attack.\n- Prepare to escalate the issue to higher management if the attack impacts critical systems.\n\n### 2. Short-term Actions (1-24 hours)\n\n#### a. Strengthen Authentication Mechanisms\n- Enforce strong password policies (complexity, length, expiration) to reduce the risk of successful brute force attacks.\n- Enable and enforce Multi-Factor Authentication (MFA) for all users, especially those with access to sensitive or critical data.\n\n#### b. Adjust Account Lockout Policies\n- Implement or refine account lockout policies (e.g., account locks after a certain number of failed login attempts) to hinder ongoing brute force attempts.\n\n#### c. Enhance Monitoring and Alerting Capabilities\n- Adjust the sensitivity of IDS and other monitoring tools to better detect and alert on signs of brute force attacks.\n\n### 3. Investigation Steps\n\n#### a. Analyze Attack Pattern\n- Review the logs to determine the origin, method, and pattern of the attack. Identify the most targeted accounts or services.\n- Investigate whether any accounts were successfully compromised during the attack.\n\n#### b. Assess the Scope\n- Determine the extent of the attack and assess whether other systems or services might be at risk or already affected.\n\n### 4. Recovery Procedures\n\n#### a. Restore Affected Services\n- If any accounts or systems were compromised, follow your organization\u2019s incident response plan for recovery.\n- Reset passwords and security tokens for affected accounts.\n\n#### b. Remediate Security Gaps\n- Based on the findings from the investigation, address any identified security weaknesses that could be exploited by future brute force attacks.\n\n### 5. Validation Checks\n\n#### a. Test New Security Measures\n- Verify that new security measures such as MFA and strengthened password policies are functioning correctly.\n- Conduct penetration testing to evaluate the resilience of the system against new brute force methods.\n\n#### b. Review Incident Response Effectiveness\n- Assess the response to the brute force attack and identify any areas for improvement in procedures or policies.\n- Update incident response and disaster recovery plans based on lessons learned from the attack.\n\n#### c. Continue Monitoring\n- Keep monitoring systems for any signs of recurrence or follow-up attacks.\n- Regularly review and update the IDS and other monitoring tools to adapt to new emerging threat patterns.\n\n---\n\n### Note:\nGiven the absence of historical data, relevant policies, and identified vulnerabilities, this playbook focuses on general best practices for mitigating and responding to brute force attacks. It is recommended to develop specific policies and gather data on similar incidents as part of enhancing organizational cybersecurity posture.",
+        "estimated_resolution_time": "1-4 hours",
+        "required_resources": [
+          "SOC Analyst",
+          "System Admin"
+        ],
+        "compliance_considerations": []
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:57.202689",
+      "action": "compliance_evaluation_start",
+      "details": {
+        "host": "9.251.108.218"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:57.202970",
+      "action": "rag_query_start",
+      "details": {
+        "query": "compliance policy check on 9.251.108.218",
+        "collection": "policy",
+        "top_k": 8
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-14T04:21:57.539391",
+      "action": "rag_query_success",
+      "details": {
+        "collection": "policy",
+        "results_count": 0
+      },
+      "result": []
+    },
+    {
+      "timestamp": "2026-02-14T04:21:57.539687",
+      "action": "compliance_evaluation_complete",
+      "details": {
+        "timestamp": "2026-02-14T04:21:57.539659",
+        "host": "9.251.108.218",
+        "total_policies_checked": 0,
+        "policy_results": [],
+        "compliance_status": {
+          "PASS": 0,
+          "FAIL": 0,
+          "UNKNOWN": 0
+        },
+        "violations": [],
+        "remediation_required": [],
+        "analysis": "No policy records found for 9.251.108.218"
+      },
+      "result": null
+    }
+  ],
+  "total_actions": 26,
+  "summary": {
+    "threats_detected": 2,
+    "analyses_performed": 2,
+    "policies_evaluated": 2
+  }
+}

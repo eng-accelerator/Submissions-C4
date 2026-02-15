@@ -1,0 +1,764 @@
+{
+  "generated_at": "2026-02-15T07:51:05.338158",
+  "audit_trail": [
+    {
+      "timestamp": "2026-02-15T07:36:59.392703",
+      "action": "incident_response_start",
+      "details": {
+        "threat": "Brute force attack",
+        "severity": "CRITICAL"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:37:03.485986",
+      "action": "incident_response_complete",
+      "details": {
+        "timestamp": "2026-02-15T07:37:03.485978",
+        "threat": "Brute force attack",
+        "severity": "CRITICAL",
+        "playbook": {
+          "timestamp": "2026-02-15T07:37:02.988377",
+          "agent": "IncidentResponseAgent",
+          "threat": "Brute force attack",
+          "severity": "CRITICAL",
+          "playbook_steps": [
+            "Activate incident command center",
+            "Isolate affected systems",
+            "Begin forensic collection",
+            "Notify stakeholders"
+          ],
+          "estimated_resolution_time": "< 30 minutes",
+          "historical_incidents": 5,
+          "relevant_policies": 5,
+          "status": "READY"
+        },
+        "historical_context": {
+          "timestamp": "2026-02-15T07:37:02.998332",
+          "agent": "IncidentResponseAgent",
+          "threat_type": "Brute force attack",
+          "historical_incidents": [
+            "Security Incident Alert:\n        Alert ID: ALERT-166120\n        Timestamp: 2026-02-01T04:54:35Z\n        Source IP: 192.103.73.211\n        Target IP: 181.140.170.164\n        Alert Type: DDOS\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-158117\n        Timestamp: 2026-02-03T06:40:45Z\n        Source IP: 148.251.72.193\n        Target IP: 126.192.121.136\n        Alert Type: DDOS\n        Recommendation: reset credentials\n        "
+          ],
+          "incident_count": 5,
+          "lessons_learned": "Analysis of historical patterns available"
+        },
+        "recovery_procedures": {
+          "timestamp": "2026-02-15T07:37:03.485914",
+          "agent": "IncidentResponseAgent",
+          "incident_type": "Brute force attack",
+          "recovery_procedures": [
+            "Security Incident Alert:\n        Alert ID: ALERT-166120\n        Timestamp: 2026-02-01T04:54:35Z\n        Source IP: 192.103.73.211\n        Target IP: 181.140.170.164\n        Alert Type: DDOS\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-160993\n        Timestamp: 2026-02-09T11:03:43Z\n        Source IP: 124.192.27.38\n        Target IP: 34.114.85.114\n        Alert Type: DDOS\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-163665\n        Timestamp: 2026-02-11T01:00:38Z\n        Source IP: 181.69.13.242\n        Target IP: 190.83.145.48\n        Alert Type: DDOS\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-162200\n        Timestamp: 2026-02-04T03:43:51Z\n        Source IP: 192.114.151.143\n        Target IP: 83.125.21.100\n        Alert Type: DDOS\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-107597\n        Timestamp: 2026-02-10T18:01:55Z\n        Source IP: 201.152.247.166\n        Target IP: 192.234.61.194\n        Alert Type: DDOS\n        Recommendation: reset credentials\n        "
+          ],
+          "procedure_count": 5
+        },
+        "validation_status": {
+          "timestamp": "2026-02-15T07:37:03.485974",
+          "agent": "IncidentResponseAgent",
+          "incident_id": "INC-20260215073703",
+          "recovery_status": "IN_PROGRESS",
+          "validation_checks": [
+            "System connectivity restored",
+            "Services responding",
+            "Data integrity verified",
+            "Backups validated"
+          ],
+          "overall_status": "SUCCESS"
+        },
+        "status": "READY"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:38:49.069706",
+      "action": "incident_response_start",
+      "details": {
+        "threat": "cross site scripting",
+        "severity": "CRITICAL"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:38:51.644437",
+      "action": "incident_response_complete",
+      "details": {
+        "timestamp": "2026-02-15T07:38:51.644430",
+        "threat": "cross site scripting",
+        "severity": "CRITICAL",
+        "playbook": {
+          "timestamp": "2026-02-15T07:38:51.101622",
+          "agent": "IncidentResponseAgent",
+          "threat": "cross site scripting",
+          "severity": "CRITICAL",
+          "playbook_steps": [
+            "Activate incident command center",
+            "Isolate affected systems",
+            "Begin forensic collection",
+            "Notify stakeholders"
+          ],
+          "estimated_resolution_time": "< 30 minutes",
+          "historical_incidents": 5,
+          "relevant_policies": 5,
+          "status": "READY"
+        },
+        "historical_context": {
+          "timestamp": "2026-02-15T07:38:51.112634",
+          "agent": "IncidentResponseAgent",
+          "threat_type": "cross site scripting",
+          "historical_incidents": [
+            "Security Incident Alert:\n        Alert ID: ALERT-176505\n        Timestamp: 2026-02-07T06:14:56Z\n        Source IP: 176.124.69.188\n        Target IP: 45.107.67.249\n        Alert Type: BRUTE_FORCE\n        Recommendation: isolate host\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-189651\n        Timestamp: 2026-02-06T05:44:08Z\n        Source IP: 247.59.39.116\n        Target IP: 50.188.168.244\n        Alert Type: BRUTE_FORCE\n        Recommendation: isolate host\n        "
+          ],
+          "incident_count": 5,
+          "lessons_learned": "Analysis of historical patterns available"
+        },
+        "recovery_procedures": {
+          "timestamp": "2026-02-15T07:38:51.644370",
+          "agent": "IncidentResponseAgent",
+          "incident_type": "cross site scripting",
+          "recovery_procedures": [
+            "Security Incident Alert:\n        Alert ID: ALERT-178659\n        Timestamp: 2026-02-07T01:53:07Z\n        Source IP: 119.56.86.243\n        Target IP: 15.37.242.79\n        Alert Type: BRUTE_FORCE\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-160428\n        Timestamp: 2026-02-06T09:51:03Z\n        Source IP: 250.172.207.78\n        Target IP: 249.31.107.244\n        Alert Type: BRUTE_FORCE\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-106541\n        Timestamp: 2026-02-01T01:51:37Z\n        Source IP: 56.52.1.205\n        Target IP: 123.162.51.140\n        Alert Type: BRUTE_FORCE\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-109404\n        Timestamp: 2026-02-03T04:52:10Z\n        Source IP: 200.249.242.101\n        Target IP: 231.223.31.107\n        Alert Type: BRUTE_FORCE\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-113286\n        Timestamp: 2026-02-02T01:52:36Z\n        Source IP: 113.244.248.153\n        Target IP: 204.26.36.215\n        Alert Type: BRUTE_FORCE\n        Recommendation: reset credentials\n        "
+          ],
+          "procedure_count": 5
+        },
+        "validation_status": {
+          "timestamp": "2026-02-15T07:38:51.644427",
+          "agent": "IncidentResponseAgent",
+          "incident_id": "INC-20260215073851",
+          "recovery_status": "IN_PROGRESS",
+          "validation_checks": [
+            "System connectivity restored",
+            "Services responding",
+            "Data integrity verified",
+            "Backups validated"
+          ],
+          "overall_status": "SUCCESS"
+        },
+        "status": "READY"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:39:07.787492",
+      "action": "incident_response_start",
+      "details": {
+        "threat": "cross site scripting",
+        "severity": "LOW"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:39:08.084994",
+      "action": "incident_response_complete",
+      "details": {
+        "timestamp": "2026-02-15T07:39:08.084990",
+        "threat": "cross site scripting",
+        "severity": "LOW",
+        "playbook": {
+          "timestamp": "2026-02-15T07:39:08.056107",
+          "agent": "IncidentResponseAgent",
+          "threat": "cross site scripting",
+          "severity": "LOW",
+          "playbook_steps": [
+            "Log incident",
+            "Initial analysis",
+            "Plan remediation",
+            "Execute fixes"
+          ],
+          "estimated_resolution_time": "4-24 hours",
+          "historical_incidents": 5,
+          "relevant_policies": 5,
+          "status": "READY"
+        },
+        "historical_context": {
+          "timestamp": "2026-02-15T07:39:08.066042",
+          "agent": "IncidentResponseAgent",
+          "threat_type": "cross site scripting",
+          "historical_incidents": [
+            "Security Incident Alert:\n        Alert ID: ALERT-176505\n        Timestamp: 2026-02-07T06:14:56Z\n        Source IP: 176.124.69.188\n        Target IP: 45.107.67.249\n        Alert Type: BRUTE_FORCE\n        Recommendation: isolate host\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-189651\n        Timestamp: 2026-02-06T05:44:08Z\n        Source IP: 247.59.39.116\n        Target IP: 50.188.168.244\n        Alert Type: BRUTE_FORCE\n        Recommendation: isolate host\n        "
+          ],
+          "incident_count": 5,
+          "lessons_learned": "Analysis of historical patterns available"
+        },
+        "recovery_procedures": {
+          "timestamp": "2026-02-15T07:39:08.084930",
+          "agent": "IncidentResponseAgent",
+          "incident_type": "cross site scripting",
+          "recovery_procedures": [
+            "Security Incident Alert:\n        Alert ID: ALERT-178659\n        Timestamp: 2026-02-07T01:53:07Z\n        Source IP: 119.56.86.243\n        Target IP: 15.37.242.79\n        Alert Type: BRUTE_FORCE\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-160428\n        Timestamp: 2026-02-06T09:51:03Z\n        Source IP: 250.172.207.78\n        Target IP: 249.31.107.244\n        Alert Type: BRUTE_FORCE\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-106541\n        Timestamp: 2026-02-01T01:51:37Z\n        Source IP: 56.52.1.205\n        Target IP: 123.162.51.140\n        Alert Type: BRUTE_FORCE\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-109404\n        Timestamp: 2026-02-03T04:52:10Z\n        Source IP: 200.249.242.101\n        Target IP: 231.223.31.107\n        Alert Type: BRUTE_FORCE\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-113286\n        Timestamp: 2026-02-02T01:52:36Z\n        Source IP: 113.244.248.153\n        Target IP: 204.26.36.215\n        Alert Type: BRUTE_FORCE\n        Recommendation: reset credentials\n        "
+          ],
+          "procedure_count": 5
+        },
+        "validation_status": {
+          "timestamp": "2026-02-15T07:39:08.084986",
+          "agent": "IncidentResponseAgent",
+          "incident_id": "INC-20260215073908",
+          "recovery_status": "IN_PROGRESS",
+          "validation_checks": [
+            "System connectivity restored",
+            "Services responding",
+            "Data integrity verified",
+            "Backups validated"
+          ],
+          "overall_status": "SUCCESS"
+        },
+        "status": "READY"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:42:21.522712",
+      "action": "compliance_eval_start",
+      "details": {
+        "host": null
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:42:21.963050",
+      "action": "compliance_eval_complete",
+      "details": {
+        "timestamp": "2026-02-15T07:42:21.963046",
+        "host": "ENTERPRISE",
+        "compliance": {
+          "timestamp": "2026-02-15T07:42:21.934299",
+          "scope": "ENTERPRISE",
+          "iso27001": {
+            "timestamp": "2026-02-15T07:42:21.905317",
+            "agent": "PolicyCheckerAgent",
+            "standard": "ISO27001",
+            "total_checks": 8,
+            "compliant": 0,
+            "non_compliant": 8,
+            "compliance_rate": 0.0,
+            "details": [
+              "Policy Compliance Check:\n        Host: 235.113.188.234\n        Policy ID: P-2046\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+              "Policy Compliance Check:\n        Host: 10.232.73.217\n        Policy ID: P-1922\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+              "Policy Compliance Check:\n        Host: 189.27.22.254\n        Policy ID: P-5853\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        "
+            ]
+          },
+          "nist_csf": {
+            "timestamp": "2026-02-15T07:42:21.921848",
+            "agent": "PolicyCheckerAgent",
+            "standard": "NIST-CSF",
+            "total_checks": 8,
+            "compliant": 6,
+            "non_compliant": 2,
+            "compliance_rate": 75.0,
+            "details": [
+              "Policy Compliance Check:\n        Host: 253.233.234.134\n        Policy ID: P-1121\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: TLS>=1.2 enforced\n        ",
+              "Policy Compliance Check:\n        Host: 253.150.164.202\n        Policy ID: P-0139\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: TLS>=1.2 enforced\n        ",
+              "Policy Compliance Check:\n        Host: 253.154.44.55\n        Policy ID: P-1695\n        Standard: NIST-CSF\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        "
+            ]
+          },
+          "soc2": {
+            "timestamp": "2026-02-15T07:42:21.934281",
+            "agent": "PolicyCheckerAgent",
+            "standard": "SOC2",
+            "total_checks": 8,
+            "compliant": 6,
+            "non_compliant": 2,
+            "compliance_rate": 75.0,
+            "details": [
+              "Policy Compliance Check:\n        Host: 114.141.69.52\n        Policy ID: P-0004\n        Standard: SOC2\n        Status: PASS\n        Detail: MFA enabled\n        ",
+              "Policy Compliance Check:\n        Host: 106.134.236.63\n        Policy ID: P-2025\n        Standard: SOC2\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+              "Policy Compliance Check:\n        Host: 202.105.15.237\n        Policy ID: P-1846\n        Standard: SOC2\n        Status: FAIL\n        Detail: MFA enabled\n        "
+            ]
+          },
+          "status": "COMPLETE"
+        },
+        "violations": {
+          "timestamp": "2026-02-15T07:42:21.945872",
+          "agent": "PolicyCheckerAgent",
+          "total_violations": 10,
+          "violations": [
+            "Policy Compliance Check:\n        Host: 139.253.112.194\n        Policy ID: P-3593\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 43.111.95.20\n        Policy ID: P-1976\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 121.67.10.162\n        Policy ID: P-1870\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 220.140.94.229\n        Policy ID: P-1867\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 117.154.132.167\n        Policy ID: P-1732\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 216.235.92.6\n        Policy ID: P-1984\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 10.232.73.217\n        Policy ID: P-1922\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 137.56.141.44\n        Policy ID: P-1844\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 239.14.154.57\n        Policy ID: P-1827\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 217.14.107.241\n        Policy ID: P-1840\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        "
+          ],
+          "critical_violations": 0
+        },
+        "audit_report": {
+          "timestamp": "2026-02-15T07:42:21.963031",
+          "agent": "PolicyCheckerAgent",
+          "host": "ENTERPRISE",
+          "audit_findings": [
+            "Policy Compliance Check:\n        Host: 140.61.239.242\n        Policy ID: P-1923\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 97.210.236.134\n        Policy ID: P-1799\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 145.40.149.166\n        Policy ID: P-2783\n        Standard: NIST-CSF\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 101.145.211.200\n        Policy ID: P-1965\n        Standard: NIST-CSF\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 33.247.122.111\n        Policy ID: P-1989\n        Standard: NIST-CSF\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 207.246.173.8\n        Policy ID: P-1972\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 132.149.217.167\n        Policy ID: P-2500\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 135.205.196.70\n        Policy ID: P-1897\n        Standard: NIST-CSF\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 202.52.226.186\n        Policy ID: P-1263\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 111.104.126.205\n        Policy ID: P-1018\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        "
+          ],
+          "total_findings": 10,
+          "report_status": "GENERATED"
+        },
+        "status": "COMPLETE"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:44:57.556941",
+      "action": "compliance_eval_start",
+      "details": {
+        "host": "192.168.24.1"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:44:59.325000",
+      "action": "compliance_eval_complete",
+      "details": {
+        "timestamp": "2026-02-15T07:44:59.324995",
+        "host": "192.168.24.1",
+        "compliance": {
+          "timestamp": "2026-02-15T07:44:58.908698",
+          "agent": "PolicyCheckerAgent",
+          "host": "192.168.24.1",
+          "policies_checked": 8,
+          "compliance_status": {
+            "PASS": 8,
+            "FAIL": 0,
+            "UNKNOWN": 0
+          },
+          "overall_score": 100.0,
+          "violations": [],
+          "status": "COMPLETED"
+        },
+        "violations": {
+          "timestamp": "2026-02-15T07:44:58.922983",
+          "agent": "PolicyCheckerAgent",
+          "total_violations": 10,
+          "violations": [
+            "Policy Compliance Check:\n        Host: 139.253.112.194\n        Policy ID: P-3593\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 43.111.95.20\n        Policy ID: P-1976\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 121.67.10.162\n        Policy ID: P-1870\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 220.140.94.229\n        Policy ID: P-1867\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 117.154.132.167\n        Policy ID: P-1732\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 216.235.92.6\n        Policy ID: P-1984\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 10.232.73.217\n        Policy ID: P-1922\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 137.56.141.44\n        Policy ID: P-1844\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 239.14.154.57\n        Policy ID: P-1827\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 217.14.107.241\n        Policy ID: P-1840\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        "
+          ],
+          "critical_violations": 0
+        },
+        "audit_report": {
+          "timestamp": "2026-02-15T07:44:59.324971",
+          "agent": "PolicyCheckerAgent",
+          "host": "192.168.24.1",
+          "audit_findings": [
+            "Policy Compliance Check:\n        Host: 192.146.10.195\n        Policy ID: P-7540\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 44.192.230.113\n        Policy ID: P-7276\n        Standard: ISO27001\n        Status: PASS\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 246.233.153.192\n        Policy ID: P-4311\n        Standard: ISO27001\n        Status: PASS\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 221.192.83.203\n        Policy ID: P-7912\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 168.168.80.160\n        Policy ID: P-2256\n        Standard: ISO27001\n        Status: PASS\n        Detail: SSH root disabled\n        "
+          ],
+          "total_findings": 5,
+          "report_status": "GENERATED"
+        },
+        "status": "COMPLETE"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:47:04.104025",
+      "action": "compliance_eval_start",
+      "details": {
+        "host": "10.100.1.25"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:47:04.671404",
+      "action": "compliance_eval_complete",
+      "details": {
+        "timestamp": "2026-02-15T07:47:04.671399",
+        "host": "10.100.1.25",
+        "compliance": {
+          "timestamp": "2026-02-15T07:47:04.582589",
+          "agent": "PolicyCheckerAgent",
+          "host": "10.100.1.25",
+          "policies_checked": 8,
+          "compliance_status": {
+            "PASS": 4,
+            "FAIL": 4,
+            "UNKNOWN": 0
+          },
+          "overall_score": 50.0,
+          "violations": [
+            "Policy Compliance Check:\n        Host: 149.106.45.124\n        Policy ID: P-2111\n        Standard: NI",
+            "Policy Compliance Check:\n        Host: 101.145.211.200\n        Policy ID: P-1965\n        Standard: N",
+            "Policy Compliance Check:\n        Host: 101.115.89.163\n        Policy ID: P-3801\n        Standard: NI",
+            "Policy Compliance Check:\n        Host: 9.206.124.12\n        Policy ID: P-2054\n        Standard: NIST"
+          ],
+          "status": "COMPLETED"
+        },
+        "violations": {
+          "timestamp": "2026-02-15T07:47:04.656688",
+          "agent": "PolicyCheckerAgent",
+          "total_violations": 10,
+          "violations": [
+            "Policy Compliance Check:\n        Host: 139.253.112.194\n        Policy ID: P-3593\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 43.111.95.20\n        Policy ID: P-1976\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 121.67.10.162\n        Policy ID: P-1870\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 220.140.94.229\n        Policy ID: P-1867\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 117.154.132.167\n        Policy ID: P-1732\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 216.235.92.6\n        Policy ID: P-1984\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 10.232.73.217\n        Policy ID: P-1922\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 137.56.141.44\n        Policy ID: P-1844\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 239.14.154.57\n        Policy ID: P-1827\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 217.14.107.241\n        Policy ID: P-1840\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        "
+          ],
+          "critical_violations": 0
+        },
+        "audit_report": {
+          "timestamp": "2026-02-15T07:47:04.671376",
+          "agent": "PolicyCheckerAgent",
+          "host": "10.100.1.25",
+          "audit_findings": [
+            "Policy Compliance Check:\n        Host: 202.52.226.186\n        Policy ID: P-1263\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 111.104.126.205\n        Policy ID: P-1018\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 140.61.239.242\n        Policy ID: P-1923\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 149.106.45.124\n        Policy ID: P-2111\n        Standard: NIST-CSF\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 132.149.217.167\n        Policy ID: P-2500\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        "
+          ],
+          "total_findings": 5,
+          "report_status": "GENERATED"
+        },
+        "status": "COMPLETE"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:47:54.940595",
+      "action": "threat_detection_start",
+      "details": {
+        "alert": "Brute force attack detected on port 22 from 122.161.239.59"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:47:55.823887",
+      "action": "threat_detection_complete",
+      "details": {
+        "timestamp": "2026-02-15T07:47:55.823877",
+        "alert": "Brute force attack detected on port 22 from 122.161.239.59",
+        "threat_level": "CRITICAL",
+        "log_analysis": {
+          "timestamp": "2026-02-15T07:47:55.289699",
+          "agent": "LogMonitorAgent",
+          "host": null,
+          "severity_filter": null,
+          "logs_analyzed": 0,
+          "suspicious_patterns": [],
+          "metadata": [],
+          "alert_count": 0,
+          "status": "COMPLETED"
+        },
+        "threat_enrichment": {
+          "timestamp": "2026-02-15T07:47:55.799996",
+          "agent": "ThreatIntelligenceAgent",
+          "threat": "Brute force attack detected on port 22 from 122.161.239.59",
+          "related_cves": [
+            "CVE Record:\n        CVE ID: CVE-2026-13905\n        Published Date: 2026-02-04\n        CVSS Base Score: 5.3\n        Description: Sample vulnerability #13905\n        Affected Products: Vendor80 Prod441 v3.1\n        ",
+            "CVE Record:\n        CVE ID: CVE-2026-13921\n        Published Date: 2026-03-08\n        CVSS Base Score: 6.6\n        Description: Sample vulnerability #13921\n        Affected Products: Vendor48 Prod22 v2.4\n        ",
+            "CVE Record:\n        CVE ID: CVE-2026-13903\n        Published Date: 2026-03-28\n        CVSS Base Score: 8.7\n        Description: Sample vulnerability #13903\n        Affected Products: Vendor25 Prod477 v5.3\n        "
+          ],
+          "cve_count": 8,
+          "related_incidents": [
+            "Security Incident Alert:\n        Alert ID: ALERT-122170\n        Timestamp: 2026-02-05T03:44:56Z\n        Source IP: 179.72.252.134\n        Target IP: 248.220.130.122\n        Alert Type: BRUTE_FORCE\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-143300\n        Timestamp: 2026-02-09T10:11:52Z\n        Source IP: 129.226.212.3\n        Target IP: 42.179.9.171\n        Alert Type: BRUTE_FORCE\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-164591\n        Timestamp: 2026-02-04T20:44:00Z\n        Source IP: 226.137.198.192\n        Target IP: 134.37.236.249\n        Alert Type: BRUTE_FORCE\n        Recommendation: reset credentials\n        "
+          ],
+          "incident_count": 5,
+          "confidence": "HIGH",
+          "status": "COMPLETED"
+        },
+        "severity_assessment": {
+          "timestamp": "2026-02-15T07:47:55.823847",
+          "agent": "ThreatIntelligenceAgent",
+          "threat": "Brute force attack detected on port 22 from 122.161.239.59",
+          "severity": "CRITICAL",
+          "supporting_cves": 5,
+          "supporting_incidents": 5
+        },
+        "status": "COMPLETE"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:47:55.823971",
+      "action": "vuln_analysis_start",
+      "details": {
+        "host": "114.210.246.246"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:47:55.903513",
+      "action": "vuln_analysis_complete",
+      "details": {
+        "timestamp": "2026-02-15T07:47:55.903508",
+        "host": "114.210.246.246",
+        "vulnerability_scan": {
+          "timestamp": "2026-02-15T07:47:55.876235",
+          "agent": "VulnerabilityAnalysisAgent",
+          "host": "114.210.246.246",
+          "vulnerabilities_found": 5,
+          "vulnerability_details": [
+            "Vulnerability Scan Result:\n        Issue ID: VULN-10100\n        Host: 143.189.42.230\n        Severity: HIGH\n        Issue Type: weak_cipher\n        Finding: Weak cipher detected\n        Remediation: Apply patch\n        ",
+            "Vulnerability Scan Result:\n        Issue ID: VULN-12162\n        Host: 186.11.129.223\n        Severity: HIGH\n        Issue Type: weak_cipher\n        Finding: Weak cipher detected\n        Remediation: Apply patch\n        ",
+            "Vulnerability Scan Result:\n        Issue ID: VULN-13104\n        Host: 219.96.80.203\n        Severity: HIGH\n        Issue Type: weak_cipher\n        Finding: Weak cipher detected\n        Remediation: Apply patch\n        "
+          ],
+          "severity_breakdown": {
+            "CRITICAL": 1,
+            "HIGH": 4,
+            "MEDIUM": 0,
+            "LOW": 0
+          },
+          "status": "COMPLETED"
+        },
+        "remediation_priority": {
+          "timestamp": "2026-02-15T07:47:55.890525",
+          "agent": "VulnerabilityAnalysisAgent",
+          "host": "114.210.246.246",
+          "total_vulnerabilities": 5,
+          "priority_count": 3,
+          "priority_items": [
+            "Vulnerability Scan Result:\n        Issue ID: VULN-10182\n        Host: 181.136.80.215\n        Severity: CRITICAL\n        Issue Type: config_issue\n        Finding: Open port exposed\n        Remediation: Apply patch\n        ",
+            "Vulnerability Scan Result:\n        Issue ID: VULN-11428\n        Host: 159.79.3.74\n        Severity: HIGH\n        Issue Type: config_issue\n        Finding: Misconfig found\n        Remediation: Apply patch\n        ",
+            "Vulnerability Scan Result:\n        Issue ID: VULN-13364\n        Host: 179.100.175.39\n        Severity: HIGH\n        Issue Type: config_issue\n        Finding: Open port exposed\n        Remediation: Apply patch\n        "
+          ],
+          "remediation_priority": "URGENT"
+        },
+        "compliance_status": {
+          "timestamp": "2026-02-15T07:47:55.903358",
+          "agent": "PolicyCheckerAgent",
+          "host": "114.210.246.246",
+          "policies_checked": 8,
+          "compliance_status": {
+            "PASS": 6,
+            "FAIL": 2,
+            "UNKNOWN": 0
+          },
+          "overall_score": 75.0,
+          "violations": [
+            "Policy Compliance Check:\n        Host: 202.252.4.246\n        Policy ID: P-1954\n        Standard: ISO",
+            "Policy Compliance Check:\n        Host: 117.154.132.167\n        Policy ID: P-1732\n        Standard: I"
+          ],
+          "status": "COMPLETED"
+        },
+        "status": "COMPLETE"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:47:55.903560",
+      "action": "incident_response_start",
+      "details": {
+        "threat": "Brute force attack",
+        "severity": "HIGH"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:47:55.957411",
+      "action": "incident_response_complete",
+      "details": {
+        "timestamp": "2026-02-15T07:47:55.957407",
+        "threat": "Brute force attack",
+        "severity": "HIGH",
+        "playbook": {
+          "timestamp": "2026-02-15T07:47:55.931598",
+          "agent": "IncidentResponseAgent",
+          "threat": "Brute force attack",
+          "severity": "HIGH",
+          "playbook_steps": [
+            "Alert security team",
+            "Contain threat",
+            "Investigate impact",
+            "Plan recovery"
+          ],
+          "estimated_resolution_time": "1-4 hours",
+          "historical_incidents": 5,
+          "relevant_policies": 5,
+          "status": "READY"
+        },
+        "historical_context": {
+          "timestamp": "2026-02-15T07:47:55.942106",
+          "agent": "IncidentResponseAgent",
+          "threat_type": "Brute force attack",
+          "historical_incidents": [
+            "Security Incident Alert:\n        Alert ID: ALERT-166120\n        Timestamp: 2026-02-01T04:54:35Z\n        Source IP: 192.103.73.211\n        Target IP: 181.140.170.164\n        Alert Type: DDOS\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-158117\n        Timestamp: 2026-02-03T06:40:45Z\n        Source IP: 148.251.72.193\n        Target IP: 126.192.121.136\n        Alert Type: DDOS\n        Recommendation: reset credentials\n        "
+          ],
+          "incident_count": 5,
+          "lessons_learned": "Analysis of historical patterns available"
+        },
+        "recovery_procedures": {
+          "timestamp": "2026-02-15T07:47:55.957207",
+          "agent": "IncidentResponseAgent",
+          "incident_type": "Brute force attack",
+          "recovery_procedures": [
+            "Security Incident Alert:\n        Alert ID: ALERT-166120\n        Timestamp: 2026-02-01T04:54:35Z\n        Source IP: 192.103.73.211\n        Target IP: 181.140.170.164\n        Alert Type: DDOS\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-160993\n        Timestamp: 2026-02-09T11:03:43Z\n        Source IP: 124.192.27.38\n        Target IP: 34.114.85.114\n        Alert Type: DDOS\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-163665\n        Timestamp: 2026-02-11T01:00:38Z\n        Source IP: 181.69.13.242\n        Target IP: 190.83.145.48\n        Alert Type: DDOS\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-162200\n        Timestamp: 2026-02-04T03:43:51Z\n        Source IP: 192.114.151.143\n        Target IP: 83.125.21.100\n        Alert Type: DDOS\n        Recommendation: reset credentials\n        ",
+            "Security Incident Alert:\n        Alert ID: ALERT-107597\n        Timestamp: 2026-02-10T18:01:55Z\n        Source IP: 201.152.247.166\n        Target IP: 192.234.61.194\n        Alert Type: DDOS\n        Recommendation: reset credentials\n        "
+          ],
+          "procedure_count": 5
+        },
+        "validation_status": {
+          "timestamp": "2026-02-15T07:47:55.957403",
+          "agent": "IncidentResponseAgent",
+          "incident_id": "INC-20260215074755",
+          "recovery_status": "IN_PROGRESS",
+          "validation_checks": [
+            "System connectivity restored",
+            "Services responding",
+            "Data integrity verified",
+            "Backups validated"
+          ],
+          "overall_status": "SUCCESS"
+        },
+        "status": "READY"
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:47:55.957456",
+      "action": "compliance_eval_start",
+      "details": {
+        "host": null
+      },
+      "result": null
+    },
+    {
+      "timestamp": "2026-02-15T07:47:56.017835",
+      "action": "compliance_eval_complete",
+      "details": {
+        "timestamp": "2026-02-15T07:47:56.017831",
+        "host": "ENTERPRISE",
+        "compliance": {
+          "timestamp": "2026-02-15T07:47:55.996447",
+          "scope": "ENTERPRISE",
+          "iso27001": {
+            "timestamp": "2026-02-15T07:47:55.970987",
+            "agent": "PolicyCheckerAgent",
+            "standard": "ISO27001",
+            "total_checks": 8,
+            "compliant": 0,
+            "non_compliant": 8,
+            "compliance_rate": 0.0,
+            "details": [
+              "Policy Compliance Check:\n        Host: 235.113.188.234\n        Policy ID: P-2046\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+              "Policy Compliance Check:\n        Host: 10.232.73.217\n        Policy ID: P-1922\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+              "Policy Compliance Check:\n        Host: 189.27.22.254\n        Policy ID: P-5853\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        "
+            ]
+          },
+          "nist_csf": {
+            "timestamp": "2026-02-15T07:47:55.983931",
+            "agent": "PolicyCheckerAgent",
+            "standard": "NIST-CSF",
+            "total_checks": 8,
+            "compliant": 6,
+            "non_compliant": 2,
+            "compliance_rate": 75.0,
+            "details": [
+              "Policy Compliance Check:\n        Host: 253.233.234.134\n        Policy ID: P-1121\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: TLS>=1.2 enforced\n        ",
+              "Policy Compliance Check:\n        Host: 253.150.164.202\n        Policy ID: P-0139\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: TLS>=1.2 enforced\n        ",
+              "Policy Compliance Check:\n        Host: 253.154.44.55\n        Policy ID: P-1695\n        Standard: NIST-CSF\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        "
+            ]
+          },
+          "soc2": {
+            "timestamp": "2026-02-15T07:47:55.996428",
+            "agent": "PolicyCheckerAgent",
+            "standard": "SOC2",
+            "total_checks": 8,
+            "compliant": 6,
+            "non_compliant": 2,
+            "compliance_rate": 75.0,
+            "details": [
+              "Policy Compliance Check:\n        Host: 114.141.69.52\n        Policy ID: P-0004\n        Standard: SOC2\n        Status: PASS\n        Detail: MFA enabled\n        ",
+              "Policy Compliance Check:\n        Host: 106.134.236.63\n        Policy ID: P-2025\n        Standard: SOC2\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+              "Policy Compliance Check:\n        Host: 202.105.15.237\n        Policy ID: P-1846\n        Standard: SOC2\n        Status: FAIL\n        Detail: MFA enabled\n        "
+            ]
+          },
+          "status": "COMPLETE"
+        },
+        "violations": {
+          "timestamp": "2026-02-15T07:47:56.007599",
+          "agent": "PolicyCheckerAgent",
+          "total_violations": 10,
+          "violations": [
+            "Policy Compliance Check:\n        Host: 139.253.112.194\n        Policy ID: P-3593\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 43.111.95.20\n        Policy ID: P-1976\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 121.67.10.162\n        Policy ID: P-1870\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 220.140.94.229\n        Policy ID: P-1867\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 117.154.132.167\n        Policy ID: P-1732\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 216.235.92.6\n        Policy ID: P-1984\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 10.232.73.217\n        Policy ID: P-1922\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 137.56.141.44\n        Policy ID: P-1844\n        Standard: ISO27001\n        Status: FAIL\n        Detail: TLS>=1.2 enforced\n        ",
+            "Policy Compliance Check:\n        Host: 239.14.154.57\n        Policy ID: P-1827\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 217.14.107.241\n        Policy ID: P-1840\n        Standard: ISO27001\n        Status: FAIL\n        Detail: MFA enabled\n        "
+          ],
+          "critical_violations": 0
+        },
+        "audit_report": {
+          "timestamp": "2026-02-15T07:47:56.017821",
+          "agent": "PolicyCheckerAgent",
+          "host": "ENTERPRISE",
+          "audit_findings": [
+            "Policy Compliance Check:\n        Host: 140.61.239.242\n        Policy ID: P-1923\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 97.210.236.134\n        Policy ID: P-1799\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 145.40.149.166\n        Policy ID: P-2783\n        Standard: NIST-CSF\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 101.145.211.200\n        Policy ID: P-1965\n        Standard: NIST-CSF\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 33.247.122.111\n        Policy ID: P-1989\n        Standard: NIST-CSF\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 207.246.173.8\n        Policy ID: P-1972\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 132.149.217.167\n        Policy ID: P-2500\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 135.205.196.70\n        Policy ID: P-1897\n        Standard: NIST-CSF\n        Status: FAIL\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 202.52.226.186\n        Policy ID: P-1263\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        ",
+            "Policy Compliance Check:\n        Host: 111.104.126.205\n        Policy ID: P-1018\n        Standard: NIST-CSF\n        Status: PASS\n        Detail: MFA enabled\n        "
+          ],
+          "total_findings": 10,
+          "report_status": "GENERATED"
+        },
+        "status": "COMPLETE"
+      },
+      "result": null
+    }
+  ],
+  "total_actions": 20,
+  "summary": {
+    "threat_detections": 2,
+    "vulnerability_analyses": 2,
+    "incident_responses": 8,
+    "compliance_evaluations": 8
+  }
+}
