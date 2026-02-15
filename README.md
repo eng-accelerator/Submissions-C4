@@ -1,5 +1,5 @@
 # Submissions-C4
-Upload your Assignments here : [https://docs.google.com/document/d/13C-fnx1m6xJlJApvTO8JjPgzY_ztSXgAgSEkJ68Dn6w/edit?usp=sharing](Project List)
+Upload your Assignments here: [Project List](https://docs.google.com/document/d/13C-fnx1m6xJlJApvTO8JjPgzY_ztSXgAgSEkJ68Dn6w/edit?usp=sharing)
 
 ## Group 13 🚀 AI LangGraph Agentic Security Log Monitor
 
@@ -8,8 +8,8 @@ An AI-powered system that ingests security logs, runs an autonomous LangGraph ag
 ### 🔗 Key Submission Links
 
 - 🎥 **Demo Video**: [Link to your demo video here]
-- 📊 **Presentation Deck**: [https://app.chroniclehq.com/d578f860-76ec-4ca8-b701-655ddd089892/document/fe1894e5-74d5-4cd1-8d21-73a04ea74419/intro](AI Agentic Security Log Monitor)
-- 💻 **Source Code**: [https://github.com/b0rgbart3/group13](group13)
+- 📊 **Presentation Deck**: [AI Agentic Security Log Monitor](https://app.chroniclehq.com/d578f860-76ec-4ca8-b701-655ddd089892/document/fe1894e5-74d5-4cd1-8d21-73a04ea74419/intro)
+- 💻 **Source Code**: [Group 13](https://github.com/b0rgbart3/group13)
 
 ### ❗ Problem
 
