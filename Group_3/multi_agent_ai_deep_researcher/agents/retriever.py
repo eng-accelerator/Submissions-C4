@@ -26,9 +26,6 @@ from agents.base import BaseAgent
 from config import settings
 from utils.state import ResearchState, StateUpdate, SourceMetadata
 from utils.scraper import scrape_url
-from logging.logger import get_logger
-
-logger = get_logger(__name__)
 
 
 class RetrieverAgent(BaseAgent):
@@ -79,7 +76,6 @@ class RetrieverAgent(BaseAgent):
         
         if not user_query:
             error = "No user query provided"
-            logger.error(f"Retriever error: {error}")
             return {
                 "retrieved_docs": [],
                 "source_metadata": {},
@@ -98,15 +94,6 @@ class RetrieverAgent(BaseAgent):
                 iteration,
             )
             
-            # Log retrieval stats
-            self.log_execution(
-                f"Retrieved {len(documents)} documents from {len(source_metadata)} sources",
-                session_id=session_id,
-                duration_ms=None,
-                sources_count=len(source_metadata),
-                docs_count=len(documents),
-            )
-            
             # Convert SourceMetadata objects to dicts for state update
             source_metadata_dicts = {
                 k: v.model_dump() if isinstance(v, SourceMetadata) else v
@@ -122,7 +109,6 @@ class RetrieverAgent(BaseAgent):
             
         except Exception as e:
             error_msg = f"Retriever agent failed: {str(e)}"
-            logger.error(error_msg, exc_info=True)
             return {
                 "retrieved_docs": [],
                 "source_metadata": {},
@@ -142,8 +128,6 @@ class RetrieverAgent(BaseAgent):
             List of search results with 'title', 'url', 'snippet' keys
         """
         try:
-            logger.debug(f"Searching Tavily for: {query}")
-            
             response = self.tavily_client.search(
                 query=query,
                 max_results=self.max_sources,
@@ -159,11 +143,9 @@ class RetrieverAgent(BaseAgent):
                     "snippet": result.get("snippet", ""),
                 })
             
-            logger.info(f"Tavily search completed: {len(results)} results found")
             return results
             
         except Exception as e:
-            logger.error(f"Tavily search error: {str(e)}", exc_info=True)
             return []
     
     def _scrape_results(
@@ -194,20 +176,14 @@ class RetrieverAgent(BaseAgent):
                 continue
             
             try:
-                logger.debug(f"Scraping {url} ({idx + 1}/{len(search_results)})")
-                
                 scrape_result = scrape_url(url, timeout=self.scrape_timeout)
                 
-                if not scrape_result.get("success"):
-                    logger.warning(
-                        f"Failed to scrape {url}: {scrape_result.get('error', 'unknown error')}"
-                    )
+                if not scrape_result.success:
                     continue
                 
                 # Extract content
-                content = scrape_result.get("content", "")
+                content = scrape_result.content
                 if not content or len(content) < 50:
-                    logger.debug(f"Skipped {url} - insufficient content")
                     continue
                 
                 # Create document ID
@@ -219,26 +195,19 @@ class RetrieverAgent(BaseAgent):
                 # Create SourceMetadata object
                 metadata = SourceMetadata(
                     url=url,
-                    title=result.get("title", scrape_result.get("title", "")),
+                    title=result.get("title", scrape_result.title),
                     snippet=result.get("snippet", ""),
                     excerpt=content[:200],  # First 200 chars as excerpt
                     confidence=self._calculate_confidence(scrape_result),
                     domain=self._extract_domain(url),
-                    author=scrape_result.get("metadata", {}).get("author"),
+                    author=scrape_result.metadata.author,
                 )
                 
                 source_metadata[doc_id] = metadata
                 
-                logger.info(f"Successfully scraped {url} - {len(content)} chars")
-                
             except Exception as e:
-                logger.warning(f"Error scraping {url}: {str(e)}")
                 # Continue with next result instead of failing
                 continue
-        
-        logger.info(
-            f"Scraping complete: {len(documents)} documents from {len(source_metadata)} sources"
-        )
         
         return documents, source_metadata
     
@@ -271,7 +240,7 @@ class RetrieverAgent(BaseAgent):
         except Exception:
             return url
     
-    def _calculate_confidence(self, scrape_result: Dict[str, Any]) -> float:
+    def _calculate_confidence(self, scrape_result: Any) -> float:
         """
         Calculate confidence score for scraped content.
         
@@ -287,21 +256,21 @@ class RetrieverAgent(BaseAgent):
         confidence = 0.5  # Base confidence
         
         # Boost for successful scrape
-        if scrape_result.get("success"):
+        if scrape_result.success:
             confidence += 0.2
         
         # Boost for longer content (more substantial article)
-        content_len = len(scrape_result.get("content", ""))
+        content_len = len(scrape_result.content or "")
         if content_len > 1000:
             confidence += 0.15
         elif content_len > 500:
             confidence += 0.1
         
         # Boost for available metadata
-        metadata = scrape_result.get("metadata", {})
-        if metadata.get("author"):
+        metadata = scrape_result.metadata
+        if metadata.author:
             confidence += 0.1
-        if metadata.get("published_date"):
+        if metadata.published_date:
             confidence += 0.05
         
         return min(1.0, confidence)  # Cap at 1.0

@@ -38,10 +38,6 @@ class Settings(BaseSettings):
         max_refinement_passes: Maximum iterations for retriever refinement
         chunk_size: Chunk size for document processing
         
-        # Logging Configuration
-        log_level: Logging level (DEBUG, INFO, WARNING, ERROR)
-        log_format: 'json' for structured JSON logging or 'text' for readable format
-        
         # Feature Flags
         enable_source_tracking: Enable metadata tracking for sources
         enable_streaming: Enable real-time streaming to UI
@@ -62,16 +58,12 @@ class Settings(BaseSettings):
     
     # Checkpoint & Session Configuration
     checkpoint_path: str = "./data/checkpoints"
-    session_memory_type: str = "sqlite"  # 'memory' or 'sqlite'
+    session_memory_type: str = "memory"  
     
     # Research Configuration
     max_sources_default: int = 10
     max_refinement_passes: int = 3
     chunk_size: int = 1000
-    
-    # Logging Configuration
-    log_level: str = "INFO"  # DEBUG, INFO, WARNING, ERROR
-    log_format: str = "json"  # 'json' or 'text'
     
     # Feature Flags
     enable_source_tracking: bool = True

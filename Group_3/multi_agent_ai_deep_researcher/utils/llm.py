@@ -24,9 +24,17 @@ from tenacity import (
 )
 
 from config import settings
-from logging.logger import get_logger
+import sys
+from pathlib import Path
 
-logger = get_logger(__name__)
+# Avoid local package name collision with stdlib `logging`.
+_PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(_PROJECT_ROOT) in sys.path:
+    sys.path.remove(str(_PROJECT_ROOT))
+import logging  # stdlib logging
+sys.path.insert(0, str(_PROJECT_ROOT))
+
+logger = logging.getLogger(__name__)
 
 # Global LLM instance (lazy loaded)
 _llm_instance: Optional[OllamaLLM] = None
@@ -122,7 +130,7 @@ def call_llm(
     prompt: str,
     max_tokens: int = 2000,
     temperature: float = 0.7,
-) -> LLMResponse:
+) -> Dict[str, Any]:
     """
     Call LLM with a prompt and return response as Pydantic model.
     
@@ -134,7 +142,7 @@ def call_llm(
         temperature: Sampling temperature (0.0-1.0)
     
     Returns:
-        LLMResponse with success, content, model, and token counts
+        Dict with success, content, model, and token counts
     
     Raises:
         LLMError: If LLM call fails
@@ -158,7 +166,7 @@ def call_llm(
             input_tokens=input_tokens,
             output_tokens=output_tokens,
             error=None,
-        )
+        ).model_dump()
         
     except Exception as e:
         logger.error(f"LLM call failed: {str(e)}")
