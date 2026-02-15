@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Financial Advisor - Multi-Agent Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#d4af37"/>
+                            <stop offset="100%" stop-color="#b76e79"/>
+                        </linearGradient>
+                    </defs>
+                    <circle cx="24" cy="24" r="22" stroke="url(#logoGradient)" stroke-width="2" fill="none" opacity="0.3"/>
+                    <circle cx="24" cy="24" r="18" stroke="url(#logoGradient)" stroke-width="2" fill="none" opacity="0.5"/>
+                    <path d="M24 8 L32 18 L28 24 L32 30 L24 40 L16 30 L20 24 L16 18 Z" fill="url(#logoGradient)" opacity="0.9"/>
+                    <circle cx="24" cy="24" r="4" fill="url(#logoGradient)"/>
+                </svg>
+                <h1>Vérité Financial</h1>
+            </div>
+            <div class="header-subtitle">
+                Multi-Agent Intelligence · Personalized Wealth Strategy
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="card upload-section">
+                <h2>📄 Upload Financial Documents</h2>
+                <p class="section-description">Upload bank statements, pay stubs, credit card statements, or any financial document</p>
+                
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" accept=".txt,.pdf,.docx,.csv,.xlsx" style="display: none;">
+                    <div class="upload-icon">📁</div>
+                    <p class="upload-text">Drag & drop your file here or click to browse</p>
+                    <p class="upload-hint">Supported: PDF, DOCX, TXT, CSV, XLSX (max 16MB)</p>
+                </div>
+
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+
+                <button class="btn btn-secondary" id="manualInputBtn">
+                    ✏️ Enter Financial Data Manually
+                </button>
+            </section>
+
+            <!-- Status Section -->
+            <section class="card status-section" id="statusSection" style="display: none;">
+                <div class="status-indicator">
+                    <div class="spinner"></div>
+                    <div id="statusMessage">Processing your financial data...</div>
+                </div>
+            </section>
+
+            <!-- Financial Summary -->
+            <section class="card summary-section" id="summarySection" style="display: none;">
+                <h2>📊 Financial Health Summary</h2>
+                <div class="summary-grid" id="summaryGrid">
+                    <!-- Summary cards will be dynamically inserted -->
+                </div>
+            </section>
+
+            <!-- Agent Analysis Tabs -->
+            <section class="card agents-section" id="agentsSection" style="display: none;">
+                <h2>🤖 AI Agent Analysis</h2>
+                <p class="section-description">Select an agent to get specialized financial advice</p>
+                
+                <div class="agent-tabs">
+                    <button class="agent-tab active" data-agent="comprehensive">
+                        🎯 Complete Plan
+                    </button>
+                    <button class="agent-tab" data-agent="debt">
+                        💳 Debt Payoff
+                    </button>
+                    <button class="agent-tab" data-agent="savings">
+                        💰 Savings Strategy
+                    </button>
+                    <button class="agent-tab" data-agent="budget">
+                        📊 Budget Optimizer
+                    </button>
+                    <button class="agent-tab" data-agent="investment">
+                        📈 Investments
+                    </button>
+                    <button class="agent-tab" data-agent="tax">
+                        🏛️ Tax Planning
+                    </button>
+                    <button class="agent-tab" data-agent="emergency">
+                        🚨 Emergency Fund
+                    </button>
+                </div>
+
+                <div class="agent-results" id="agentResults">
+                    <div class="empty-state">
+                        <div class="empty-icon">🤖</div>
+                        <p>Select an agent above to get started with your analysis</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Manual Input Modal -->
+            <div class="modal" id="manualInputModal" style="display: none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Enter Your Financial Information</h2>
+                        <button class="close-btn" id="closeModal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="manualInputForm">
+                            <div class="form-group">
+                                <label>Monthly Income (after tax)</label>
+                                <input type="number" name="monthly_income" placeholder="5000" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Current Savings</label>
+                                <input type="number" name="savings" placeholder="10000" required>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>Monthly Expenses</h3>
+                                <div id="expensesContainer">
+                                    <div class="expense-row">
+                                        <input type="text" placeholder="Category (e.g., Rent)" class="expense-category">
+                                        <input type="number" placeholder="Amount" class="expense-amount">
+                                        <button type="button" class="btn-icon" onclick="removeExpense(this)">🗑️</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="addExpense()">
+                                    + Add Expense
+                                </button>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>Debts</h3>
+                                <div id="debtsContainer">
+                                    <div class="debt-row">
+                                        <input type="text" placeholder="Debt Name" class="debt-name">
+                                        <input type="number" placeholder="Balance" class="debt-balance">
+                                        <input type="number" placeholder="Interest %" class="debt-rate" step="0.01">
+                                        <input type="number" placeholder="Min Payment" class="debt-payment">
+                                        <button type="button" class="btn-icon" onclick="removeDebt(this)">🗑️</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="addDebt()">
+                                    + Add Debt
+                                </button>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Financial Goals (comma-separated)</label>
+                                <textarea name="goals" placeholder="Pay off credit cards, Build emergency fund, Save for house" rows="3"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Save & Analyze
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by Claude AI Multi-Agent Intelligence · Secure · Private · Confidential</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

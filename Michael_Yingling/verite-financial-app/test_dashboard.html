@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Test - Vérité Financial</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        .output {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .info { color: #17a2b8; }
+        h2 { color: #333; }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .summary-card h3 {
+            font-size: 12px;
+            color: #718096;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .summary-card .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+        .summary-card .label {
+            font-size: 12px;
+            color: #a0aec0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Dashboard Diagnostic Tool</h1>
+    <p>Use this page to test if the Financial Health Dashboard is working correctly.</p>
+
+    <!-- Test 1: Create Test Data -->
+    <div class="test-section">
+        <h2>Test 1: Create Test Data</h2>
+        <p>This creates sample financial data without needing to upload a document.</p>
+        <button onclick="createTestData()">Create Test Data</button>
+        <div id="test1Output" class="output" style="display:none;"></div>
+    </div>
+
+    <!-- Test 2: Fetch Summary -->
+    <div class="test-section">
+        <h2>Test 2: Fetch Summary</h2>
+        <p>After creating test data, fetch the financial summary.</p>
+        <button onclick="fetchSummary()">Fetch Summary</button>
+        <div id="test2Output" class="output" style="display:none;"></div>
+    </div>
+
+    <!-- Test 3: Display Dashboard -->
+    <div class="test-section">
+        <h2>Test 3: Display Dashboard</h2>
+        <p>Visualize the summary data as cards.</p>
+        <button onclick="displayDashboard()">Display Dashboard</button>
+        <div id="dashboardDisplay" style="display:none;">
+            <div class="summary-grid" id="summaryGrid"></div>
+        </div>
+    </div>
+
+    <!-- Test 4: Full Flow -->
+    <div class="test-section">
+        <h2>Test 4: Complete Flow</h2>
+        <p>Run all steps: Create data → Fetch summary → Display dashboard</p>
+        <button onclick="runFullTest()">Run Full Test</button>
+        <div id="test4Output" class="output" style="display:none;"></div>
+    </div>
+
+    <!-- Upload Test -->
+    <div class="test-section">
+        <h2>Test 5: Upload Document</h2>
+        <p>Upload a text file with financial info to test document parsing.</p>
+        <input type="file" id="fileInput" accept=".txt,.pdf,.docx">
+        <button onclick="uploadFile()">Upload & Parse</button>
+        <div id="uploadOutput" class="output" style="display:none;"></div>
+    </div>
+
+    <script>
+        let summaryData = null;
+
+        function log(elementId, message, type = 'info') {
+            const output = document.getElementById(elementId);
+            output.style.display = 'block';
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error' : (type === 'success' ? 'success' : 'info');
+            output.innerHTML += `<span class="${className}">[${timestamp}] ${message}</span>\n`;
+        }
+
+        function clear(elementId) {
+            const output = document.getElementById(elementId);
+            output.innerHTML = '';
+        }
+
+        async function createTestData() {
+            clear('test1Output');
+            log('test1Output', 'Creating test data...', 'info');
+            
+            try {
+                const response = await fetch('/api/test-data', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    log('test1Output', `✅ SUCCESS: ${result.message}`, 'success');
+                    log('test1Output', `Session ID: ${result.session_id}`, 'info');
+                } else {
+                    log('test1Output', `❌ ERROR: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                log('test1Output', `❌ ERROR: ${error.message}`, 'error');
+            }
+        }
+
+        async function fetchSummary() {
+            clear('test2Output');
+            log('test2Output', 'Fetching summary...', 'info');
+            
+            try {
+                const response = await fetch('/api/summary');
+                const result = await response.json();
+                
+                if (result.success) {
+                    summaryData = result.data;
+                    log('test2Output', '✅ SUCCESS: Summary fetched!', 'success');
+                    log('test2Output', JSON.stringify(result.data, null, 2), 'info');
+                } else {
+                    log('test2Output', `❌ ERROR: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                log('test2Output', `❌ ERROR: ${error.message}`, 'error');
+            }
+        }
+
+        function displayDashboard() {
+            const display = document.getElementById('dashboardDisplay');
+            const grid = document.getElementById('summaryGrid');
+            
+            if (!summaryData) {
+                alert('Please run Test 2 first to fetch summary data!');
+                return;
+            }
+            
+            display.style.display = 'block';
+            grid.innerHTML = '';
+            
+            const cards = [
+                { title: 'Monthly Income', value: formatCurrency(summaryData.monthly_income), label: 'After tax' },
+                { title: 'Monthly Expenses', value: formatCurrency(summaryData.monthly_expenses), label: 'Fixed + Variable' },
+                { title: 'Net Cash Flow', value: formatCurrency(summaryData.net_monthly_cash_flow), label: 'Available monthly' },
+                { title: 'Total Debt', value: formatCurrency(summaryData.total_debt), label: 'All obligations' },
+                { title: 'Current Savings', value: formatCurrency(summaryData.current_savings), label: 'Emergency + General' },
+                { title: 'Savings Rate', value: summaryData.savings_rate_percent.toFixed(1) + '%', label: 'Of gross income' },
+                { title: 'Debt-to-Income', value: summaryData.debt_to_income_ratio_percent.toFixed(1) + '%', label: 'Total debt vs annual income' },
+                { title: 'Financial Health', value: summaryData.financial_health_score, label: 'Overall score' }
+            ];
+            
+            cards.forEach(card => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'summary-card';
+                cardEl.innerHTML = `
+                    <h3>${card.title}</h3>
+                    <div class="value">${card.value}</div>
+                    <div class="label">${card.label}</div>
+                `;
+                grid.appendChild(cardEl);
+            });
+        }
+
+        async function runFullTest() {
+            clear('test4Output');
+            log('test4Output', '🚀 Starting full test...', 'info');
+            
+            // Step 1: Create test data
+            log('test4Output', '\n=== STEP 1: Creating test data ===', 'info');
+            try {
+                const response1 = await fetch('/api/test-data', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const result1 = await response1.json();
+                
+                if (result1.success) {
+                    log('test4Output', '✅ Test data created', 'success');
+                } else {
+                    log('test4Output', `❌ Failed to create test data: ${result1.error}`, 'error');
+                    return;
+                }
+            } catch (error) {
+                log('test4Output', `❌ Error creating test data: ${error.message}`, 'error');
+                return;
+            }
+            
+            // Step 2: Fetch summary
+            log('test4Output', '\n=== STEP 2: Fetching summary ===', 'info');
+            try {
+                const response2 = await fetch('/api/summary');
+                const result2 = await response2.json();
+                
+                if (result2.success) {
+                    summaryData = result2.data;
+                    log('test4Output', '✅ Summary fetched', 'success');
+                    log('test4Output', `   Income: ${formatCurrency(summaryData.monthly_income)}`, 'info');
+                    log('test4Output', `   Expenses: ${formatCurrency(summaryData.monthly_expenses)}`, 'info');
+                    log('test4Output', `   Net Cash Flow: ${formatCurrency(summaryData.net_monthly_cash_flow)}`, 'info');
+                } else {
+                    log('test4Output', `❌ Failed to fetch summary: ${result2.error}`, 'error');
+                    return;
+                }
+            } catch (error) {
+                log('test4Output', `❌ Error fetching summary: ${error.message}`, 'error');
+                return;
+            }
+            
+            // Step 3: Display dashboard
+            log('test4Output', '\n=== STEP 3: Displaying dashboard ===', 'info');
+            displayDashboard();
+            log('test4Output', '✅ Dashboard displayed above!', 'success');
+            
+            log('test4Output', '\n🎉 FULL TEST COMPLETED SUCCESSFULLY!', 'success');
+        }
+
+        async function uploadFile() {
+            clear('uploadOutput');
+            const fileInput = document.getElementById('fileInput');
+            
+            if (!fileInput.files || fileInput.files.length === 0) {
+                log('uploadOutput', '❌ Please select a file first', 'error');
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            log('uploadOutput', `Uploading file: ${file.name}`, 'info');
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            try {
+                const response = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    log('uploadOutput', '✅ Document uploaded and parsed!', 'success');
+                    log('uploadOutput', JSON.stringify(result.data, null, 2), 'info');
+                    
+                    // Now fetch summary
+                    log('uploadOutput', '\nFetching summary...', 'info');
+                    const summaryResponse = await fetch('/api/summary');
+                    const summaryResult = await summaryResponse.json();
+                    
+                    if (summaryResult.success) {
+                        summaryData = summaryResult.data;
+                        log('uploadOutput', '✅ Summary fetched!', 'success');
+                        displayDashboard();
+                    } else {
+                        log('uploadOutput', `⚠️ Summary fetch failed: ${summaryResult.error}`, 'error');
+                    }
+                } else {
+                    log('uploadOutput', `❌ Upload failed: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                log('uploadOutput', `❌ Error: ${error.message}`, 'error');
+            }
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            }).format(amount);
+        }
+    </script>
+</body>
+</html>
