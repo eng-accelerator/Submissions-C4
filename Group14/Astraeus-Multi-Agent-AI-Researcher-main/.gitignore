@@ -1,0 +1,59 @@
+# ══════════════════════════════════════════════════════════════
+# Astraeus — .gitignore
+# ══════════════════════════════════════════════════════════════
+
+# ── Secrets & Environment Variables ───────────────────────────
+.env
+.env.local
+.env.production
+.env.*.local
+# NOTE: .env.example is safe to commit (contains no real keys)
+
+# ── Python ────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+eggs/
+*.whl
+
+# ── Virtual Environments ──────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+
+# ── Vector DB / Persisted Data ────────────────────────────────
+data/chroma_db/
+data/vector_db/
+*.npy
+store.json
+
+# ── IDE / Editor ──────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.cursor/
+
+# ── OS Files ──────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ── Logs & Temp ───────────────────────────────────────────────
+*.log
+*.tmp
+*.bak
+
+# ── Jupyter / Notebooks ──────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── Sentence Transformers Model Cache ─────────────────────────
+# (auto-downloaded, ~90MB — no need to commit)
+model_cache/
