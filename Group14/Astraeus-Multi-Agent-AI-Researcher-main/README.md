@@ -14,8 +14,8 @@ Astraeus is an autonomous multi-agent AI research system that plans, investigate
 
 ## 🔗 Key Submission Links
 
-- **💻 GitHub Repository:** https://github.com/deeptiparrikar/Astraeus-Multi-Agent-AI-Researcher
-- **📊 Live Dashboard:** Streamlit-based interactive research pipeline
+- **💻 GitHub Repository:** https://github.com/eng-accelerator/Submissions-C4/edit/Group14_Hackathon_Project/Group14
+- **📊 Video Walkthrough:** https://drive.google.com/drive/folders/1M8MFSg0QdiASsJ71SHxzK55WCpNP6gLc?usp=sharing
 - **📄 Documentation:** See README.md in repository
 - **🎨 Agent Pipeline Visualization:** ![Agent Orchestration](https://raw.githubusercontent.com/deeptiparrikar/Astraeus-Multi-Agent-AI-Researcher/main/assets/agent_orchestration_chart.png)
 
