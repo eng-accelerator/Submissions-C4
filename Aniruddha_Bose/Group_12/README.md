@@ -168,7 +168,7 @@ When a user submits a query to the Knowledge Base chat:
 
 Built with **Gradio 4+**, the UI (`front-end.py`) provides a split-panel interface.
 
-![App Screenshot](App.png)
+![App Screenshot](https://github.com/eng-accelerator/Submissions-C4/blob/C4-Group12_Hackathon/Aniruddha_Bose/Group_12/Hackathon/images/App.png)
 
 ### Layout
 
