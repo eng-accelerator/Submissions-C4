@@ -17,7 +17,7 @@ A production-grade AI application that performs **deep medical research** using 
 - [Environment Variables](#environment-variables)
 - [Usage](#usage)
 - [How It Works — End to End](#how-it-works--end-to-end)
-- [Key Submission Links](#Key-Submission-Link)
+- [Key Submission Links](#key-submission-links)
 
 ---
 
