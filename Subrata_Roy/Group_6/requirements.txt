@@ -1,0 +1,31 @@
+# Core
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+
+# LLM & Agents (OpenRouter-compatible)
+openai>=1.0.0
+langchain>=0.3.0
+langchain-openai>=0.2.0
+langgraph>=0.2.0
+
+# Vector store & embeddings
+chromadb>=0.4.0
+tiktoken>=0.5.0
+
+# Slack & JIRA
+slack-sdk>=3.0.0
+jira>=3.0.0
+atlassian-python-api>=3.0.0
+
+# API & UI
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+streamlit>=1.29.0
+python-multipart>=0.0.6
+
+# Utils
+python-dateutil>=2.8.0
+regex>=2023.0.0
+
+# Optional: for local embeddings when OPENAI_API_KEY is not set
+# sentence-transformers>=2.2.0

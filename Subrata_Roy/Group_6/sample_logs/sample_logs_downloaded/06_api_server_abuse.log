@@ -1,0 +1,24 @@
+[2024-03-24 18:00:01] INFO api-gateway: Request received | method=GET path=/api/v1/users endpoint=list_users client_ip=10.0.1.100 user_id=12345 latency_ms=45
+[2024-03-24 18:00:15] WARN api-gateway: Rate limit exceeded | client_ip=198.51.100.50 endpoint=/api/v1/search requests_per_minute=1000 limit=100 action=throttled
+[2024-03-24 18:00:16] WARN api-gateway: Rate limit exceeded | client_ip=198.51.100.50 endpoint=/api/v1/search requests_per_minute=1050 limit=100 action=throttled
+[2024-03-24 18:00:17] ERROR api-gateway: Rate limit critical | client_ip=198.51.100.50 endpoint=/api/v1/search requests_per_minute=1100 limit=100 action=blocked
+[2024-03-24 18:01:00] ERROR api-gateway: Authentication failed | client_ip=185.220.101.75 endpoint=/api/v1/admin/users reason=invalid_api_key attempts=1
+[2024-03-24 18:01:05] ERROR api-gateway: Authentication failed | client_ip=185.220.101.75 endpoint=/api/v1/admin/users reason=invalid_api_key attempts=2
+[2024-03-24 18:01:10] ERROR api-gateway: Authentication failed | client_ip=185.220.101.75 endpoint=/api/v1/admin/users reason=invalid_api_key attempts=3
+[2024-03-24 18:01:15] CRITICAL api-gateway: API key brute force detected | client_ip=185.220.101.75 endpoint=/api/v1/admin/users attempts=10 time_window_seconds=60 action=ip_blocked
+[2024-03-24 18:02:30] WARN api-gateway: Suspicious payload detected | client_ip=203.0.113.89 endpoint=/api/v1/upload payload_size_mb=500 max_allowed_mb=10 action=rejected
+[2024-03-24 18:03:00] ERROR api-gateway: SQL injection attempt | client_ip=192.0.2.150 endpoint=/api/v1/users/search query_param="1' UNION SELECT * FROM admin_users--" action=blocked
+[2024-03-24 18:03:15] ERROR api-gateway: Path traversal attempt | client_ip=192.0.2.150 endpoint=/api/v1/files/download file_param="../../etc/passwd" action=blocked
+[2024-03-24 18:04:00] WARN api-gateway: Missing authentication header | client_ip=10.0.1.200 endpoint=/api/v1/admin/settings action=rejected status_code=401
+[2024-03-24 18:04:30] ERROR api-gateway: Token expired | client_ip=10.0.1.50 endpoint=/api/v1/users user_id=67890 token_age_hours=25 max_age_hours=24 action=rejected
+[2024-03-24 18:05:00] CRITICAL api-gateway: Unauthorized access attempt | client_ip=45.142.120.75 endpoint=/api/v1/admin/delete_all user_role=guest required_role=admin action=blocked
+[2024-03-24 18:05:30] WARN api-gateway: Unusual API usage pattern | client_ip=103.251.167.100 endpoints_accessed=50 time_window_minutes=5 pattern=enumeration_suspected
+[2024-03-24 18:06:00] ERROR api-gateway: CORS violation | client_ip=198.51.100.100 origin=http://malicious-site.com endpoint=/api/v1/payment/process action=blocked
+[2024-03-24 18:06:30] INFO api-gateway: Request received | method=DELETE path=/api/v1/users/all endpoint=delete_all_users client_ip=192.0.2.200 user_id=admin status_code=403
+[2024-03-24 18:07:00] CRITICAL api-gateway: Mass data extraction attempt | client_ip=185.220.101.100 endpoint=/api/v1/export requests=1000 time_window_minutes=1 data_returned_gb=15 flag=data_exfiltration
+[2024-03-24 18:07:30] ERROR api-gateway: Malformed JWT token | client_ip=203.0.113.200 endpoint=/api/v1/profile error=invalid_signature action=rejected
+[2024-03-24 18:08:00] WARN api-gateway: API version deprecated access | client_ip=10.0.1.75 endpoint=/api/v0/legacy/users version=v0 deprecated_since=2023-01-01 
+[2024-03-24 18:08:30] ERROR api-gateway: Webhook verification failed | client_ip=45.142.120.200 endpoint=/api/webhooks/payment signature_invalid=true source_claimed=stripe action=rejected
+[2024-03-24 18:09:00] CRITICAL api-gateway: Admin endpoint accessed with regular user token | client_ip=10.0.1.100 endpoint=/api/v1/admin/system/config user_role=user required_role=admin flag=privilege_escalation_attempt
+[2024-03-24 18:09:30] ERROR api-gateway: GraphQL depth limit exceeded | client_ip=198.51.100.150 endpoint=/api/graphql query_depth=50 max_depth=10 action=blocked pattern=dos_attempt
+[2024-03-24 18:10:00] WARN api-gateway: Excessive API calls from single user | user_id=99999 requests_per_hour=10000 normal_usage=50 time_window=1h flag=compromised_account_suspected

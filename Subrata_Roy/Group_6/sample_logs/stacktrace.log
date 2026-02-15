@@ -1,0 +1,6 @@
+[2024-03-24 10:17:00] ERROR api-gateway - NullPointerException in request handler
+  at com.example.gateway.Handler.process(Handler.java:42)
+  at com.example.gateway.Handler.doFilter(Handler.java:38)
+  at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+Caused by: java.lang.NullPointerException
+  at com.example.gateway.Validator.validate(Validator.java:21)

@@ -1,0 +1,1 @@
+2024-03-24 15:10:27 UTC [12347]: [1-1] user=webapp,db=production,app=WebApp,client=10.0.1.100 FATAL:  remaining connection slots are reserved for non-replication superuser connections

@@ -1,0 +1,4 @@
+{"timestamp": "2024-03-24T10:15:20Z", "level": "ERROR", "service": "user-service", "message": "Database connection pool exhausted", "pid": 1001, "request_id": "req-abc-123"}
+{"timestamp": "2024-03-24T10:15:21Z", "level": "ERROR", "service": "user-service", "message": "Could not acquire connection from pool", "pid": 1001}
+{"timestamp": "2024-03-24T10:15:25Z", "level": "WARN", "service": "payment-service", "message": "Rate limit exceeded for client 192.168.1.50", "rate_limit": 100}
+{"timestamp": "2024-03-24T10:16:00Z", "level": "ERROR", "service": "auth-service", "message": "Authentication failure: invalid token", "component": "jwt"}

@@ -1,0 +1,164 @@
+{
+  "eventVersion": "1.08",
+  "eventTime": "2024-03-24T21:00:00Z",
+  "eventSource": "iam.amazonaws.com",
+  "eventName": "CreateAccessKey",
+  "awsRegion": "us-east-1",
+  "sourceIPAddress": "185.220.101.200",
+  "userAgent": "aws-cli/2.13.0",
+  "requestParameters": {"userName": "admin"},
+  "responseElements": {"accessKey": {"accessKeyId": "AKIA****************", "status": "Active", "createDate": "2024-03-24T21:00:00Z"}},
+  "errorCode": null,
+  "errorMessage": null,
+  "userIdentity": {"type": "IAMUser", "userName": "compromised-user", "accountId": "123456789012"}
+}
+{
+  "eventVersion": "1.08",
+  "eventTime": "2024-03-24T21:01:00Z",
+  "eventSource": "s3.amazonaws.com",
+  "eventName": "PutBucketPolicy",
+  "awsRegion": "us-east-1",
+  "sourceIPAddress": "185.220.101.200",
+  "userAgent": "aws-cli/2.13.0",
+  "requestParameters": {"bucketName": "sensitive-data-prod", "policy": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"s3:*\",\"Resource\":\"*\"}]}"},
+  "responseElements": null,
+  "errorCode": null,
+  "errorMessage": null,
+  "userIdentity": {"type": "IAMUser", "userName": "compromised-user", "accountId": "123456789012"},
+  "additionalEventData": {"flag": "PUBLIC_ACCESS_ENABLED"}
+}
+{
+  "eventVersion": "1.08",
+  "eventTime": "2024-03-24T21:02:00Z",
+  "eventSource": "s3.amazonaws.com",
+  "eventName": "GetObject",
+  "awsRegion": "us-east-1",
+  "sourceIPAddress": "185.220.101.200",
+  "userAgent": "aws-cli/2.13.0",
+  "requestParameters": {"bucketName": "sensitive-data-prod", "key": "customer-data/pii-export.csv"},
+  "responseElements": null,
+  "errorCode": null,
+  "errorMessage": null,
+  "userIdentity": {"type": "IAMUser", "userName": "compromised-user", "accountId": "123456789012"},
+  "additionalEventData": {"bytesTransferred": 524288000, "flag": "LARGE_DATA_DOWNLOAD"}
+}
+{
+  "eventVersion": "1.08",
+  "eventTime": "2024-03-24T21:03:00Z",
+  "eventSource": "ec2.amazonaws.com",
+  "eventName": "RunInstances",
+  "awsRegion": "us-west-2",
+  "sourceIPAddress": "45.142.120.100",
+  "userAgent": "Boto3/1.28.0",
+  "requestParameters": {"instanceType": "p3.8xlarge", "imageId": "ami-0abcdef1234567890", "securityGroupId": ["sg-0123456789abcdef0"]},
+  "responseElements": {"instancesSet": {"items": [{"instanceId": "i-0987654321fedcba"}]}},
+  "errorCode": null,
+  "errorMessage": null,
+  "userIdentity": {"type": "IAMUser", "userName": "crypto-miner", "accountId": "123456789012"},
+  "additionalEventData": {"flag": "GPU_INSTANCE_LAUNCHED", "cost_per_hour": "$12.24"}
+}
+{
+  "eventVersion": "1.08",
+  "eventTime": "2024-03-24T21:04:00Z",
+  "eventSource": "iam.amazonaws.com",
+  "eventName": "AttachUserPolicy",
+  "awsRegion": "us-east-1",
+  "sourceIPAddress": "185.220.101.200",
+  "userAgent": "aws-cli/2.13.0",
+  "requestParameters": {"userName": "compromised-user", "policyArn": "arn:aws:iam::aws:policy/AdministratorAccess"},
+  "responseElements": null,
+  "errorCode": null,
+  "errorMessage": null,
+  "userIdentity": {"type": "IAMUser", "userName": "compromised-user", "accountId": "123456789012"},
+  "additionalEventData": {"flag": "PRIVILEGE_ESCALATION"}
+}
+{
+  "eventVersion": "1.08",
+  "eventTime": "2024-03-24T21:05:00Z",
+  "eventSource": "ec2.amazonaws.com",
+  "eventName": "AuthorizeSecurityGroupIngress",
+  "awsRegion": "us-east-1",
+  "sourceIPAddress": "203.0.113.150",
+  "userAgent": "aws-cli/2.13.0",
+  "requestParameters": {"groupId": "sg-prod-web", "ipPermissions": [{"fromPort": 22, "toPort": 22, "ipProtocol": "tcp", "ipRanges": [{"cidrIp": "0.0.0.0/0"}]}]},
+  "responseElements": null,
+  "errorCode": null,
+  "errorMessage": null,
+  "userIdentity": {"type": "IAMUser", "userName": "devops-user", "accountId": "123456789012"},
+  "additionalEventData": {"flag": "SSH_EXPOSED_TO_INTERNET"}
+}
+{
+  "eventVersion": "1.08",
+  "eventTime": "2024-03-24T21:06:00Z",
+  "eventSource": "lambda.amazonaws.com",
+  "eventName": "UpdateFunctionCode",
+  "awsRegion": "us-east-1",
+  "sourceIPAddress": "185.220.101.200",
+  "userAgent": "aws-cli/2.13.0",
+  "requestParameters": {"functionName": "payment-processor", "zipFile": "<binary>"},
+  "responseElements": {"functionArn": "arn:aws:lambda:us-east-1:123456789012:function:payment-processor"},
+  "errorCode": null,
+  "errorMessage": null,
+  "userIdentity": {"type": "IAMUser", "userName": "compromised-user", "accountId": "123456789012"},
+  "additionalEventData": {"flag": "CRITICAL_FUNCTION_MODIFIED"}
+}
+{
+  "eventVersion": "1.08",
+  "eventTime": "2024-03-24T21:07:00Z",
+  "eventSource": "rds.amazonaws.com",
+  "eventName": "ModifyDBInstance",
+  "awsRegion": "us-east-1",
+  "sourceIPAddress": "45.142.120.100",
+  "userAgent": "aws-cli/2.13.0",
+  "requestParameters": {"dBInstanceIdentifier": "prod-database", "publiclyAccessible": true},
+  "responseElements": null,
+  "errorCode": null,
+  "errorMessage": null,
+  "userIdentity": {"type": "IAMUser", "userName": "compromised-user", "accountId": "123456789012"},
+  "additionalEventData": {"flag": "DATABASE_EXPOSED_PUBLICLY"}
+}
+{
+  "eventVersion": "1.08",
+  "eventTime": "2024-03-24T21:08:00Z",
+  "eventSource": "cloudtrail.amazonaws.com",
+  "eventName": "StopLogging",
+  "awsRegion": "us-east-1",
+  "sourceIPAddress": "185.220.101.200",
+  "userAgent": "aws-cli/2.13.0",
+  "requestParameters": {"name": "production-trail"},
+  "responseElements": null,
+  "errorCode": null,
+  "errorMessage": null,
+  "userIdentity": {"type": "IAMUser", "userName": "compromised-user", "accountId": "123456789012"},
+  "additionalEventData": {"flag": "AUDIT_LOGGING_DISABLED", "severity": "CRITICAL"}
+}
+{
+  "eventVersion": "1.08",
+  "eventTime": "2024-03-24T21:09:00Z",
+  "eventSource": "kms.amazonaws.com",
+  "eventName": "Decrypt",
+  "awsRegion": "us-east-1",
+  "sourceIPAddress": "185.220.101.200",
+  "userAgent": "aws-cli/2.13.0",
+  "requestParameters": {"keyId": "arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012", "encryptionContext": {}},
+  "responseElements": null,
+  "errorCode": null,
+  "errorMessage": null,
+  "userIdentity": {"type": "IAMUser", "userName": "compromised-user", "accountId": "123456789012"},
+  "additionalEventData": {"flag": "SENSITIVE_KEY_ACCESS", "requestCount": 150}
+}
+{
+  "eventVersion": "1.08",
+  "eventTime": "2024-03-24T21:10:00Z",
+  "eventSource": "sts.amazonaws.com",
+  "eventName": "AssumeRole",
+  "awsRegion": "us-east-1",
+  "sourceIPAddress": "203.0.113.200",
+  "userAgent": "aws-cli/2.13.0",
+  "requestParameters": {"roleArn": "arn:aws:iam::123456789012:role/ProductionAdmin", "roleSessionName": "suspicious-session"},
+  "responseElements": {"credentials": {"accessKeyId": "ASIA****************"}},
+  "errorCode": null,
+  "errorMessage": null,
+  "userIdentity": {"type": "IAMUser", "userName": "external-contractor", "accountId": "123456789012"},
+  "additionalEventData": {"flag": "UNUSUAL_ROLE_ASSUMPTION", "location": "Russia"}
+}

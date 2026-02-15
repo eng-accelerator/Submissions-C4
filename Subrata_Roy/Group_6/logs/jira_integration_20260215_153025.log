@@ -1,0 +1,54 @@
+2026-02-15 15:30:25,254 - __main__ - INFO - ======================================================================
+2026-02-15 15:30:25,254 - __main__ - INFO - JIRA Integration Script Started
+2026-02-15 15:30:25,255 - __main__ - INFO - ======================================================================
+2026-02-15 15:30:25,255 - __main__ - INFO - Step 1: Loading environment variables from .env file
+2026-02-15 15:30:25,259 - __main__ - INFO - Step 2: Validating environment variables
+2026-02-15 15:30:25,260 - __main__ - DEBUG - Checking JIRA_SERVER...
+2026-02-15 15:30:25,343 - __main__ - DEBUG - Checking JIRA_EMAIL...
+2026-02-15 15:30:25,346 - __main__ - DEBUG - Checking JIRA_API_TOKEN...
+2026-02-15 15:30:25,350 - __main__ - DEBUG - Checking JIRA_PROJECT_KEY...
+2026-02-15 15:30:25,355 - __main__ - INFO - Step 3: Connecting to JIRA
+2026-02-15 15:30:25,355 - __main__ - DEBUG - Creating JIRA connection to https://johnyquest743.atlassian.net
+2026-02-15 15:30:25,356 - __main__ - DEBUG - Using email: johnyquest743@gmail.com
+2026-02-15 15:30:25,356 - __main__ - DEBUG - Using token: ATATT3xFfG...U=2B8E0873
+2026-02-15 15:30:25,359 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): johnyquest743.atlassian.net:443
+2026-02-15 15:30:26,752 - urllib3.connectionpool - DEBUG - https://johnyquest743.atlassian.net:443 "GET /rest/api/2/serverInfo HTTP/1.1" 200 None
+2026-02-15 15:30:26,761 - __main__ - INFO - Step 4: Testing JIRA connection
+2026-02-15 15:30:26,761 - __main__ - DEBUG - Fetching server info...
+2026-02-15 15:30:27,030 - urllib3.connectionpool - DEBUG - https://johnyquest743.atlassian.net:443 "GET /rest/api/2/serverInfo HTTP/1.1" 200 None
+2026-02-15 15:30:27,044 - __main__ - INFO -    Server URL: https://johnyquest743.atlassian.net
+2026-02-15 15:30:27,045 - __main__ - INFO -    Server Version: 1001.0.0-SNAPSHOT
+2026-02-15 15:30:27,046 - __main__ - INFO -    Build Number: 100290
+2026-02-15 15:30:27,046 - __main__ - DEBUG - Fetching current user info...
+2026-02-15 15:30:27,261 - urllib3.connectionpool - DEBUG - https://johnyquest743.atlassian.net:443 "GET /rest/api/2/myself HTTP/1.1" 401 53
+2026-02-15 15:30:27,299 - __main__ - ERROR -    Error message: Client must be authenticated to access this resource.
+2026-02-15 15:30:27,310 - __main__ - ERROR -    Possible causes:
+2026-02-15 15:30:27,311 - __main__ - ERROR -    1. Invalid API token
+2026-02-15 15:30:27,311 - __main__ - ERROR -    2. Wrong email address
+2026-02-15 15:30:27,312 - __main__ - ERROR -    3. Token has been revoked
+2026-02-15 15:30:27,312 - __main__ - ERROR - 
+   Solutions:
+2026-02-15 15:30:27,312 - __main__ - ERROR -    1. Generate a new API token at:
+2026-02-15 15:30:27,313 - __main__ - ERROR -       https://id.atlassian.com/manage-profile/security/api-tokens
+2026-02-15 15:30:27,313 - __main__ - ERROR -    2. Verify your email is correct
+2026-02-15 15:30:27,314 - __main__ - DEBUG - Full error details:
+Traceback (most recent call last):
+  File "D:\Workspace\outskill\hackathon\devops_incident_handler\jira_api_test.py", line 186, in <module>
+    current_user = jira.current_user()
+  File "D:\Workspace\outskill\hackathon\devops_incident_handler\myvenv\Lib\site-packages\jira\client.py", line 4956, in current_user
+    r = self._session.get(url, headers=self._options["headers"])
+  File "D:\Workspace\outskill\hackathon\devops_incident_handler\myvenv\Lib\site-packages\requests\sessions.py", line 602, in get
+    return self.request("GET", url, **kwargs)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\outskill\hackathon\devops_incident_handler\myvenv\Lib\site-packages\jira\resilientsession.py", line 247, in request
+    elif raise_on_error(response, **processed_kwargs):
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Workspace\outskill\hackathon\devops_incident_handler\myvenv\Lib\site-packages\jira\resilientsession.py", line 72, in raise_on_error
+    raise JIRAError(
+    ...<6 lines>...
+    )
+jira.exceptions.JIRAError: JiraError HTTP 401 url: https://johnyquest743.atlassian.net/rest/api/2/myself
+	text: Client must be authenticated to access this resource.
+	
+	response headers = {'Content-Type': 'text/html;charset=UTF-8', 'Content-Length': '53', 'Connection': 'keep-alive', 'Date': 'Sun, 15 Feb 2026 10:00:28 GMT', 'Server': 'AtlassianEdge', 'Timing-Allow-Origin': '*', 'X-Arequestid': 'd5c922d96fbb1d619db5eae680aeceeb', 'X-Seraph-Loginreason': 'AUTHENTICATED_FAILED', 'Cache-Control': 'no-cache, no-store, no-transform', 'Www-Authenticate': 'OAuth realm="https%3A%2F%2Fjohnyquest743.atlassian.net"', 'X-Frame-Options': 'SAMEORIGIN', 'X-Content-Type-Options': 'nosniff', 'X-Xss-Protection': '1; mode=block', 'Atl-Traceid': '5a21324996ac4c81b35015197c712630', 'Atl-Request-Id': '5a213249-96ac-4c81-b350-15197c712630', 'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload', 'Report-To': '{"endpoints": [{"url": "https://dz8aopenkvv6s.cloudfront.net"}], "group": "endpoint-1", "include_subdomains": true, "max_age": 600}', 'Nel': '{"failure_fraction": 0.01, "include_subdomains": true, "max_age": 600, "report_to": "endpoint-1"}', 'Server-Timing': 'atl-edge;dur=184,atl-edge-internal;dur=17,atl-edge-upstream;dur=168,atl-edge-pop;desc="aws-ap-south-1"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 1f29f8f19d4237db6ec761d59273aa20.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'BLR50-P3', 'X-Amz-Cf-Id': 'O4d8fDX0WijJPk1XPqhU2-YwExI-P5qB3WT8ZhdQqQxMujbIfcm_Pg=='}
+	response text = Client must be authenticated to access this resource.

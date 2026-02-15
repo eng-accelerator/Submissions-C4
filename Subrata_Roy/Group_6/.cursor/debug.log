@@ -1,0 +1,27 @@
+{"timestamp": 1771150735579, "location": "workflow.py:_route_notification", "message": "notification route", "data": {"issues_count": 1, "severities": ["HIGH"], "route": "notify_slack", "first_issue_type": "dict"}, "hypothesisId": "B,E"}
+{"timestamp": 1771150735675, "location": "slack_notifier.py:__init__", "message": "SlackNotificationAgent init", "data": {"has_token": true, "client_is_none": false}, "hypothesisId": "A"}
+{"timestamp": 1771150735678, "location": "workflow.py:_notify_slack_node", "message": "before send", "data": {"issues_count": 1, "client_is_none": false}, "hypothesisId": "A"}
+{"timestamp": 1771150735680, "location": "slack_notifier.py:send", "message": "send entry", "data": {"client_is_none": false}, "hypothesisId": "A"}
+{"timestamp": 1771150736730, "location": "slack_notifier.py:send", "message": "send exception", "data": {"error": "The request to the Slack API failed. (url: https://slack.com/api/chat.postMessage)\nThe server responded with: {'ok': False, 'error': 'missing_scope', 'needed': 'chat:write:bot', 'provided': 'incoming-webhook'}"}, "hypothesisId": "D"}
+{"timestamp": 1771150737258, "location": "workflow.py:_notify_slack_node", "message": "after send", "data": {"sent": true}, "hypothesisId": "D"}
+{"timestamp": 1771150737259, "location": "workflow.py:_route_after_slack", "message": "jira route", "data": {"severities": ["HIGH"], "route": "create_jira"}}
+{"timestamp": 1771150737264, "location": "workflow.py:_create_jira_node", "message": "create_jira entry", "data": {"issues_count": 1}}
+{"timestamp": 1771150737265, "location": "jira_agent.py:__init__", "message": "JIRA server normalized", "data": {"server_host": "johnyquest743.atlassian.net", "raw_project_repr": "'KAN'", "project_key": "KAN"}, "hypothesisId": "H1,H2,H3"}
+{"timestamp": 1771150738083, "location": "jira_agent.py:__init__", "message": "JIRA agent init", "data": {"has_server": true, "has_email": true, "has_token": true, "project_key": "KAN", "jira_client_none": false}}
+{"timestamp": 1771150738084, "location": "jira_agent.py:create_or_comment", "message": "create_or_comment entry", "data": {"has_jira": true, "project_key": "KAN", "issues_count": 1}}
+{"timestamp": 1771150739163, "location": "jira_agent.py:create_or_comment", "message": "before create_issue", "data": {"project_key_repr": "'KAN'"}, "hypothesisId": "H5"}
+{"timestamp": 1771150753231, "location": "workflow.py:_create_jira_node", "message": "create_jira result", "data": {"jira_ticket_id": "KAN-5"}}
+{"timestamp": 1771150753241, "location": "app.py:run_analysis", "message": "invoke result", "data": {"notifications_sent": true, "issues_count": 1, "first_severity": "HIGH"}, "hypothesisId": "A,B,E"}
+{"timestamp": 1771150877286, "location": "workflow.py:_route_notification", "message": "notification route", "data": {"issues_count": 1, "severities": ["HIGH"], "route": "notify_slack", "first_issue_type": "dict"}, "hypothesisId": "B,E"}
+{"timestamp": 1771150877287, "location": "slack_notifier.py:__init__", "message": "SlackNotificationAgent init", "data": {"has_token": true, "client_is_none": false}, "hypothesisId": "A"}
+{"timestamp": 1771150877288, "location": "workflow.py:_notify_slack_node", "message": "before send", "data": {"issues_count": 1, "client_is_none": false}, "hypothesisId": "A"}
+{"timestamp": 1771150877289, "location": "slack_notifier.py:send", "message": "send entry", "data": {"client_is_none": false}, "hypothesisId": "A"}
+{"timestamp": 1771150879009, "location": "slack_notifier.py:send", "message": "send exception", "data": {"error": "The request to the Slack API failed. (url: https://slack.com/api/chat.postMessage)\nThe server responded with: {'ok': False, 'error': 'missing_scope', 'needed': 'chat:write:bot', 'provided': 'incoming-webhook'}"}, "hypothesisId": "D"}
+{"timestamp": 1771150879807, "location": "workflow.py:_notify_slack_node", "message": "after send", "data": {"sent": true}, "hypothesisId": "D"}
+{"timestamp": 1771150879808, "location": "workflow.py:_route_after_slack", "message": "jira route", "data": {"severities": ["HIGH"], "route": "create_jira"}}
+{"timestamp": 1771150879810, "location": "workflow.py:_create_jira_node", "message": "create_jira entry", "data": {"issues_count": 1}}
+{"timestamp": 1771150879811, "location": "jira_agent.py:__init__", "message": "JIRA server normalized", "data": {"server_host": "johnyquest743.atlassian.net", "raw_project_repr": "'KAN'", "project_key": "KAN"}, "hypothesisId": "H1,H2,H3"}
+{"timestamp": 1771150880644, "location": "jira_agent.py:__init__", "message": "JIRA agent init", "data": {"has_server": true, "has_email": true, "has_token": true, "project_key": "KAN", "jira_client_none": false}}
+{"timestamp": 1771150880646, "location": "jira_agent.py:create_or_comment", "message": "create_or_comment entry", "data": {"has_jira": true, "project_key": "KAN", "issues_count": 1}}
+{"timestamp": 1771150882300, "location": "workflow.py:_create_jira_node", "message": "create_jira result", "data": {"jira_ticket_id": "KAN-5"}}
+{"timestamp": 1771150882303, "location": "app.py:run_analysis", "message": "invoke result", "data": {"notifications_sent": true, "issues_count": 1, "first_severity": "HIGH"}, "hypothesisId": "A,B,E"}
