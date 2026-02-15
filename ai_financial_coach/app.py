@@ -159,6 +159,16 @@ if menu == "Dashboard":
     
     # FINANCIAL DATA & SETTINGS EXPANDER
     with st.expander("📝 Financial Data & Settings", expanded=True):
+        
+        # Manual Income Input
+        st.session_state.income_input = st.number_input(
+            "Monthly Income (Manual Entry)", 
+            min_value=0, 
+            value=st.session_state.get("income_input", 0),
+            step=1000,
+            help="Enter your estimated monthly income manually or use the PDF uploader below."
+        )
+
         uploaded_file = st.file_uploader("Upload Bank Statement (PDF)", type="pdf")
         
         if uploaded_file:
@@ -178,16 +188,16 @@ if menu == "Dashboard":
                 # Calculate Income from 'Income' type transactions
                 income_df = st.session_state.parsed_data[st.session_state.parsed_data['Type'] == 'Income']
                 if not income_df.empty:
-                    calculated_income = income_df['Amount'].sum()
-                    st.session_state.calculated_income = calculated_income
-                    st.success(f"Expenses updated! Income detected: ₹ {calculated_income:,.0f}")
+                    calculated_income = int(income_df['Amount'].sum())
+                    st.session_state.income_input = calculated_income # Update manual input
+                    st.success(f"Expenses updated! Income detected & updated: ₹ {calculated_income:,.0f}")
                 else:
                     st.success("Expenses updated from statement!")
                 
                 st.rerun()
 
-    # Determine Income to use (Calculated from PDF)
-    income = st.session_state.get("calculated_income", 0)
+    # Determine Income to use
+    income = st.session_state.income_input
 
     total_expenses = (
         st.session_state.expenses_data["Amount"].sum()
@@ -196,7 +206,7 @@ if menu == "Dashboard":
     )
 
     if income == 0 and total_expenses == 0:
-        st.info("👋 Welcome! Please upload your Bank Statement PDF in the 'Financial Data & Settings' section to proceed.")
+        st.info("👋 Welcome! Please enter your income manually or upload your Bank Statement PDF in the 'Financial Data & Settings' section to proceed.")
     
     elif st.button("🚀 Run Full Analysis"):
 
