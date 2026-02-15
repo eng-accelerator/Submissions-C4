@@ -96,11 +96,31 @@ docker run -p 8501:8501 --env-file .env astraeus
 
 ## Usage
 
-```bash
-# Launch the Streamlit dashboard
-streamlit run app.py
+### Web Dashboard
 
-# Run tests
+```bash
+streamlit run app.py
+```
+
+### Command Line Interface
+
+```bash
+# Basic research query
+python cli.py "How does RAG reduce LLM hallucinations?"
+
+# Save report to file
+python cli.py "quantum computing applications" --output report.md
+
+# Web-only retrieval with JSON output
+python cli.py "latest transformer architectures" --mode web --json
+
+# List available agents
+python cli.py --list-agents
+```
+
+### Running Tests
+
+```bash
 pytest tests/ -v
 ```
 
@@ -143,6 +163,12 @@ See [AGENTS.md](AGENTS.md) for detailed agent documentation and [ARCHITECTURE.md
 pytest tests/ -v
 ```
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
 ## License
 
-This project was built as a hackathon submission for the AI Engineering Accelerator, Cohort 4.
+MIT License. See [LICENSE](LICENSE) for details.
+
+Built as a hackathon submission for the AI Engineering Accelerator, Cohort 4.
