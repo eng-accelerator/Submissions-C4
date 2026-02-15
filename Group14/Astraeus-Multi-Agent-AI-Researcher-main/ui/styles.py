@@ -12,6 +12,20 @@ def get_custom_css() -> str:
 
 .stApp {
     font-family: 'Inter', sans-serif;
+    background-color: #0f172a !important;
+    color: #e2e8f0 !important;
+}
+
+[data-testid="stAppViewContainer"] {
+    background-color: #0f172a !important;
+}
+
+[data-testid="stHeader"] {
+    background-color: #0f172a !important;
+}
+
+section[data-testid="stSidebar"] {
+    background-color: #1e293b !important;
 }
 
 /* Agent cards */
