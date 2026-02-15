@@ -1,0 +1,192 @@
+[
+  {
+    "vulnerability_type": "CREDENTIAL_STUFFING",
+    "logs": [
+      {
+        "timestamp": "2026-02-14T08:00:01Z",
+        "client_ip": "203.0.113.90",
+        "user_id": null,
+        "method": "POST",
+        "endpoint": "/api/login",
+        "params": {"username": "alice@example.com", "password": "123456"},
+        "user_agent": "Mozilla/5.0",
+        "response_code": 401
+      },
+      {
+        "timestamp": "2026-02-14T08:00:02Z",
+        "client_ip": "203.0.113.90",
+        "user_id": null,
+        "method": "POST",
+        "endpoint": "/api/login",
+        "params": {"username": "alice@example.com", "password": "Password1"},
+        "user_agent": "Mozilla/5.0",
+        "response_code": 401
+      },
+      {
+        "timestamp": "2026-02-14T08:00:03Z",
+        "client_ip": "203.0.113.90",
+        "user_id": null,
+        "method": "POST",
+        "endpoint": "/api/login",
+        "params": {"username": "alice@example.com", "password": "Welcome2026"},
+        "user_agent": "Mozilla/5.0",
+        "response_code": 401
+      }
+    ]
+  },
+  {
+    "vulnerability_type": "POSSIBLE_IDOR",
+    "logs": [
+      {
+        "timestamp": "2026-02-14T09:10:10Z",
+        "client_ip": "198.51.100.44",
+        "user_id": 300,
+        "method": "GET",
+        "endpoint": "/api/users/301",
+        "params": {},
+        "user_agent": "Mozilla/5.0",
+        "response_code": 200
+      },
+      {
+        "timestamp": "2026-02-14T09:10:11Z",
+        "client_ip": "198.51.100.44",
+        "user_id": 300,
+        "method": "GET",
+        "endpoint": "/api/users/302",
+        "params": {},
+        "user_agent": "Mozilla/5.0",
+        "response_code": 200
+      },
+      {
+        "timestamp": "2026-02-14T09:10:12Z",
+        "client_ip": "198.51.100.44",
+        "user_id": 300,
+        "method": "GET",
+        "endpoint": "/api/users/303",
+        "params": {},
+        "user_agent": "Mozilla/5.0",
+        "response_code": 403
+      }
+    ]
+  },
+  {
+    "vulnerability_type": "SQL_INJECTION",
+    "logs": [
+      {
+        "timestamp": "2026-02-14T10:05:21Z",
+        "client_ip": "192.0.2.77",
+        "user_id": 900,
+        "method": "GET",
+        "endpoint": "/api/products",
+        "params": {"id": "5 OR 1=1"},
+        "user_agent": "sqlmap/1.7",
+        "response_code": 500
+      },
+      {
+        "timestamp": "2026-02-14T10:05:22Z",
+        "client_ip": "192.0.2.77",
+        "user_id": 900,
+        "method": "GET",
+        "endpoint": "/api/products",
+        "params": {"id": "5 UNION SELECT credit_card FROM payments--"},
+        "user_agent": "sqlmap/1.7",
+        "response_code": 500
+      }
+    ]
+  },
+  {
+    "vulnerability_type": "MASS_ASSIGNMENT",
+    "logs": [
+      {
+        "timestamp": "2026-02-14T11:20:33Z",
+        "client_ip": "192.0.2.150",
+        "user_id": 456,
+        "method": "POST",
+        "endpoint": "/api/user",
+        "body": {"name": "Eve", "role": "admin"},
+        "user_agent": "CustomClient/2.0",
+        "response_code": 200
+      },
+      {
+        "timestamp": "2026-02-14T11:20:34Z",
+        "client_ip": "192.0.2.150",
+        "user_id": 456,
+        "method": "POST",
+        "endpoint": "/api/user",
+        "body": {"name": "Eve", "isAdmin": true, "accountBalance": 999999},
+        "user_agent": "CustomClient/2.0",
+        "response_code": 200
+      }
+    ]
+  },
+  {
+    "vulnerability_type": "BUSINESS_LOGIC_ABUSE",
+    "logs": [
+      {
+        "timestamp": "2026-02-14T12:45:00Z",
+        "client_ip": "203.0.113.60",
+        "user_id": 888,
+        "method": "POST",
+        "endpoint": "/api/orders",
+        "body": {"promoCode": "FREE100"},
+        "user_agent": "Mozilla/5.0",
+        "response_code": 200
+      },
+      {
+        "timestamp": "2026-02-14T12:45:05Z",
+        "client_ip": "203.0.113.60",
+        "user_id": 888,
+        "method": "POST",
+        "endpoint": "/api/orders",
+        "body": {"promoCode": "FREE100"},
+        "user_agent": "Mozilla/5.0",
+        "response_code": 200
+      },
+      {
+        "timestamp": "2026-02-14T12:45:10Z",
+        "client_ip": "203.0.113.60",
+        "user_id": 888,
+        "method": "POST",
+        "endpoint": "/api/orders",
+        "body": {"promoCode": "FREE100"},
+        "user_agent": "Mozilla/5.0",
+        "response_code": 200
+      }
+    ]
+  },
+  {
+    "vulnerability_type": "API_SCRAPING",
+    "logs": [
+      {
+        "timestamp": "2026-02-14T13:10:01Z",
+        "client_ip": "198.51.100.101",
+        "user_id": 501,
+        "method": "GET",
+        "endpoint": "/api/products",
+        "params": {"limit": "500", "offset": "0"},
+        "user_agent": "DataMinerBot/3.0",
+        "response_code": 200
+      },
+      {
+        "timestamp": "2026-02-14T13:10:02Z",
+        "client_ip": "198.51.100.101",
+        "user_id": 501,
+        "method": "GET",
+        "endpoint": "/api/products",
+        "params": {"limit": "500", "offset": "500"},
+        "user_agent": "DataMinerBot/3.0",
+        "response_code": 200
+      },
+      {
+        "timestamp": "2026-02-14T13:10:03Z",
+        "client_ip": "198.51.100.101",
+        "user_id": 501,
+        "method": "GET",
+        "endpoint": "/api/products",
+        "params": {"limit": "500", "offset": "1000"},
+        "user_agent": "DataMinerBot/3.0",
+        "response_code": 200
+      }
+    ]
+  }
+]
