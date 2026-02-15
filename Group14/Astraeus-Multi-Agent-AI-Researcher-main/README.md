@@ -225,6 +225,5 @@ This project showcases:
 
 ---
 
-**Repository:** https://github.com/deeptiparrikar/Astraeus-Multi-Agent-AI-Researcher  
 **Submission Date:** February 15, 2026  
 **Hackathon:** Engineering Accelerator C4 Group Projects
