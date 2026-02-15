@@ -51,6 +51,23 @@ graph TD
     linkStyle 6 stroke:#1b5e20,stroke-width:2px,color:green
 ```
 
+```mermaid
+graph TD
+    Start([User Query]) --> Strategist[Search Strategist]
+    Strategist --> Gatherer[Information Gatherer]
+    Gatherer --> Extractor[Claim Extractor]
+    Extractor --> Detector[Conflict Detector]
+    
+    Detector -- "Conflict Found" --> Loop{Loop?}
+    Loop -- "Yes" --> Strategist
+    Loop -- "No" --> Verifier[Source Verifier]
+    Detector -- "No Conflict" --> Verifier
+    
+    Verifier --> Synthesizer[Knowledge Synthesizer]
+    Synthesizer --> Designer[Narrative Designer]
+    Designer --> End([Final Report])
+```
+
 
 ### 🤖 The Agents
 1.  **Search Strategist** (`research_strategist.py`): Decomposes the main query into targeted sub-questions.
