@@ -73,7 +73,7 @@ The pipeline is built with **LangGraph** and orchestrates five specialized agent
 
 ### Agent Flow Diagram
 
-![Agent Workflow](Aniruddha_Bose/Group_12/Hackathon/images/Agent-Workflow.png)
+![Agent Workflow](https://github.com/eng-accelerator/Submissions-C4/blob/C4-Group12_Hackathon/Aniruddha_Bose/Group_12/Hackathon/images/Agent-Workflow.png)
 
 ### State Schema
 
