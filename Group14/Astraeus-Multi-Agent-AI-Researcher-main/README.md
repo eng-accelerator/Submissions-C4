@@ -1,229 +1,148 @@
-# Group 14 Hackathon Submission - Astraeus Multi-Agent AI Deep Researcher
+# Astraeus - Multi-Agent AI Deep Researcher
 
-**Submitted by:** Deepti Parrikar  
-**Project Name:** Astraeus - Multi-Agent AI Deep Researcher  
-**Team:** Group 14
+**An autonomous AI research assistant powered by specialized agents, RAG, and real-time collaboration**
 
----
+```
+┌──────────────┐   ┌──────────────┐   ┌────────────────┐   ┌──────────────┐   ┌────────────────┐   ┌──────────────┐
+│ Coordinator  │──▶│  Retriever   │──▶│ Critical Check │──▶│ Fact Checker │──▶│ Insight Engine │──▶│ Report Builder│
+└──────────────┘   └──────────────┘   └────────────────┘   └──────────────┘   └────────────────┘   └──────────────┘
+       Query            Sources + RAG     Contradictions      Verification      Patterns + Gaps     Final Dossier
+```
 
-## 🚀 Executive Summary
+## Overview
 
-Astraeus is an autonomous multi-agent AI research system that plans, investigates, and synthesizes knowledge through a sequential pipeline of 6 specialized agents. It addresses the fundamental challenge of modern research: scattered truth across academic papers, live web results, technical docs, and contradictory viewpoints.
+Astraeus is a multi-agent AI research system that plans, investigates, and synthesizes knowledge autonomously.
 
----
+Modern research is hard for one simple reason: the truth is scattered. Teams must manually combine academic references, live web results, technical docs, and contradictory viewpoints. This is slow, expensive, and vulnerable to confirmation bias.
 
-## 🔗 Key Submission Links
+Astraeus solves this with a sequential swarm of 6 specialized agents. Each agent has a clear role (orchestration, retrieval, analysis, verification, insight generation, and reporting), and each stage adds structured output to a shared pipeline state. Think of it like a banking approval flow: each desk adds checks before the next desk signs off.
 
-- **💻 GitHub Repository:** https://github.com/eng-accelerator/Submissions-C4/edit/Group14_Hackathon_Project/Group14
-- **📊 Video Walkthrough:** https://drive.google.com/drive/folders/1M8MFSg0QdiASsJ71SHxzK55WCpNP6gLc?usp=sharing
-- **🎨 Agent Pipeline Visualization:** ![Agent Orchestration](https://raw.githubusercontent.com/deeptiparrikar/Astraeus-Multi-Agent-AI-Researcher/main/assets/agent_orchestration_chart.png)
+The key innovation is not just "ask an LLM and hope." This project demonstrates practical AI engineering patterns: agent orchestration, retrieval-augmented generation (RAG), multi-source evidence handling, contradiction detection, transparent confidence scoring, and real-time cost/token observability.
 
----
+## Key Features
 
-## ❗ Problem Statement
+- **6 Specialized AI Agents** working in sequence with shared pipeline state
+- **Multi-Vector Database RAG** architecture (local vector store; extensible to Pinecone/Weaviate/Chroma/Qdrant)
+- **Multi-source retrieval** combining indexed docs with live web search via Tavily
+- **Contradiction detection** and source credibility scoring
+- **Automated insights** including theme clustering, hypothesis generation, and knowledge-gap detection
+- **Real-time token and cost tracking** per agent with budget-aware operation
+- **Live animated pipeline visualization** with state transitions and per-agent progress
+- **Post-run analytics** panels (embedding space, retrieval waterfall, claims-evidence)
+- **Decision-ready markdown report** with citations and downloadable output
 
-Research teams face:
-- **Scattered Information:** Truth fragmented across multiple sources
-- **Confirmation Bias:** Manual research vulnerable to biased selection
-- **Slow Synthesis:** Time-consuming evidence gathering and analysis
-- **Lack of Transparency:** No confidence scoring or source credibility tracking
-- **Cost Blindness:** Unknown token/API costs during research
+## Technical Innovations
 
----
+- **Custom agent orchestration pipeline** with state machine flow (LangGraph-inspired)
+- **Reciprocal-rank fusion** for multi-query retrieval across heterogeneous sources
+- **Tiered credibility scoring** mapping source types to reliability weights
+- **Semantic conflict heuristics** for contradiction detection without fine-tuned models
+- **Per-agent telemetry** providing full cost/token/latency observability per pipeline stage
 
-## 💡 Solution
+## Technology Stack
 
-A **6-agent sequential pipeline** where each agent has specialized responsibilities:
+| Layer | Technologies |
+|-------|-------------|
+| **Core** | Python 3.10+, Streamlit |
+| **AI/LLM** | OpenRouter (multi-model gateway), Claude/GPT via OpenRouter, sentence-transformers (all-MiniLM-L6-v2) |
+| **RAG** | Local persistent vector store (NumPy + JSON), multi-query retrieval, reciprocal-rank fusion, Tavily web search |
+| **Analytics** | NumPy, Pandas, scikit-learn, Plotly |
+| **Extensible** | LangChain/LangGraph, LlamaIndex, Pinecone/Weaviate/Chroma/Qdrant connectors |
 
-1. **Research Coordinator** - Query analysis and expansion
-2. **Contextual Retriever** - Multi-source evidence collection (RAG + Web)
-3. **Critical Analysis** - Contradiction detection and claim extraction
-4. **Fact-Checking** - Source credibility scoring and verification
-5. **Insight Generation** - Pattern recognition and hypothesis creation
-6. **Report Builder** - Executive summary and markdown report generation
+## Setup
 
-**Key Innovation:** Not just "ask an LLM and hope" - demonstrates production-ready AI engineering patterns including agent orchestration, RAG, multi-source evidence handling, contradiction detection, confidence scoring, and real-time cost observability.
+### Prerequisites
 
----
-
-## 🛠 Technology Stack
-
-**Core Framework:**
 - Python 3.10+
-- Streamlit (interactive UI/dashboard)
+- pip
+- Git
 
-**AI & LLM:**
-- OpenRouter (multi-model gateway)
-- Anthropic Claude / OpenAI models
-- Local sentence-transformers embeddings (all-MiniLM-L6-v2)
-- Custom state machine orchestration (LangGraph-style flow)
-
-**RAG & Retrieval:**
-- Local persistent vector store (numpy + JSON)
-- Multi-query retrieval + reciprocal-rank fusion
-- Tavily web search for live evidence
-- Chunking and hybrid retrieval modes
-
-**Analytics:**
-- NumPy, Pandas, scikit-learn
-- Plotly visualizations
-- Per-agent token/cost telemetry
-
----
-
-## ✨ Key Features
-
-🤖 **6 Specialized AI Agents** working in sequence  
-🗄️ **Multi-Vector Database RAG** (extensible to Pinecone/Weaviate/Chroma/Qdrant)  
-🔍 **Multi-source retrieval** (indexed docs + live web search)  
-⚖️ **Contradiction detection** and source credibility scoring  
-💡 **Automated insights** - themes, hypotheses, knowledge-gap detection  
-📊 **Real-time token and cost tracking** per agent  
-🎨 **Live animated pipeline visualization** with state transitions  
-📈 **Post-run analytics panels** (embeddings, retrieval waterfall, claims-evidence)  
-💰 **Budget-aware operation** through token visibility  
-📄 **Decision-ready markdown reports** with citations and downloads  
-
----
-
-## 🏗 Agent Architecture
-
-### Pipeline Flow
-
-```
-User Query → Coordinator → Retriever → Critical Analysis → Fact-Checking → Insights → Report
-                            ↓               ↓                    ↓
-                    [Shared Pipeline State & Token Telemetry]
-                            ↑               ↑
-                     [Feedback loops for contradictions/insufficient evidence]
-```
-
-### Agent Details
-
-**1. Research Coordinator Agent**
-- Role: Master orchestrator
-- Responsibilities: Query analysis, query expansion, routing hints
-- Tech: Rule-based + optional LLM expansion, shared context initialization
-
-**2. Contextual Retriever Agent**
-- Role: Multi-source evidence collector
-- Responsibilities: Vector retrieval + web search, reranking, chunk assembly
-- Tech: Multi-query retrieval, fusion ranking, Tavily integration
-
-**3. Critical Analysis Agent**
-- Role: Evidence analyzer
-- Responsibilities: Claim extraction, contradiction detection, evidence chains
-- Tech: LLM JSON extraction + regex fallback + semantic conflict heuristics
-
-**4. Fact-Checking Agent**
-- Role: Claim verifier
-- Responsibilities: Source credibility scoring, support-count validation, verdicting
-- Tech: Tiered credibility map + cross-source overlap logic
-
-**5. Insight Generation Agent**
-- Role: Pattern recognizer
-- Responsibilities: Theme clustering, gap identification, hypothesis creation
-- Tech: LLM-driven synthesis + stats-based fallback
-
-**6. Report Builder Agent**
-- Role: Final synthesis
-- Responsibilities: Executive summary, key findings, citations, markdown report
-- Tech: LLM summarization + structured report assembly + downloadable output
-
----
-
-## 🎯 Innovation Highlights
-
-1. **Sequential Agent Pipeline** - Each agent adds structured output to shared state (banking approval flow pattern)
-2. **Contradiction-Aware Research** - Actively detects and highlights conflicting evidence
-3. **Transparent Cost Tracking** - Real-time token and dollar cost per agent and per call
-4. **Multi-Source Evidence** - Combines vector RAG with live web search
-5. **Production-Ready Patterns** - Demonstrates scalable enterprise workflow architecture
-6. **Visual Pipeline** - Live animated status with per-agent progress tracking
-
----
-
-## 📊 Dashboard Components
-
-- **Agent Pipeline Visualization:** Horizontal 6-card agent lane with visual states (Pending, Waiting, Running, Complete, Error)
-- **Token Usage Dashboard:** Input/output/total tokens, per-agent cost breakdown
-- **RAG Visualization:** Embedding space view, retrieval waterfall, claims & evidence panel
-- **Results & Analytics:** Fact-check totals, theme strength summaries, contradiction-aware evidence reporting
-
----
-
-## 🎓 Use Cases
-
-**Target Users:**
-- Researchers and academics
-- Business analysts and consultants
-- Students conducting literature reviews
-- Decision-makers needing source-backed insights
-- Compliance and risk assessment teams
-
-**Applications:**
-- Market research and competitive analysis
-- Academic literature reviews
-- Due diligence and fact-checking
-- Policy research and impact analysis
-- Technical documentation synthesis
-
----
-
-## 🚀 Getting Started
+### Installation
 
 ```bash
-# Clone repository
-git clone https://github.com/deeptiparrikar/Astraeus-Multi-Agent-AI-Researcher.git
+# Clone the repository
+git clone <REPO_URL>
 cd Astraeus-Multi-Agent-AI-Researcher
 
-# Create virtual environment
+# Create and activate virtual environment
 python -m venv .venv
-.venv\Scripts\Activate.ps1  # Windows
+source .venv/bin/activate   # macOS/Linux
+# .venv\Scripts\Activate.ps1  # Windows PowerShell
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Configure .env with API keys
-# OPENROUTER_API_KEY=your_key
-# TAVILY_API_KEY=your_key
-
-# Launch application
-streamlit run app.py
+# Configure environment variables
+cp .env.example .env
+# Edit .env with your API keys
 ```
 
----
+### Environment Variables
 
-## 📈 Future Roadmap
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `OPENROUTER_API_KEY` | Yes | OpenRouter API key for LLM access |
+| `TAVILY_API_KEY` | Optional | Tavily API key for live web search |
+| `LLM_MODEL` | No | Model ID (default: `openai/gpt-4o-mini`) |
+| `EMBEDDING_MODEL` | No | Embedding model (default: `all-MiniLM-L6-v2`) |
+| `TOP_K_RESULTS` | No | Number of retrieval results (default: `10`) |
 
-- LangChain / LangGraph integration
-- LlamaIndex query engines
-- Cloud vector database connectors (Pinecone, Weaviate, Chroma, Qdrant)
-- HuggingFace model alternatives
-- Citation export formats (BibTeX, APA, MLA)
-- Collaborative research sessions
-- Export to various formats (PDF, DOCX, JSON)
+### Running with Docker
 
----
+```bash
+docker build -t astraeus .
+docker run -p 8501:8501 --env-file .env astraeus
+```
 
-## 🏆 Competition Relevance
+## Usage
 
-This project showcases:
-- **Advanced AI Engineering:** Multi-agent orchestration with state management
-- **Production Patterns:** Scalable architecture suitable for enterprise deployment
-- **Cost Awareness:** Budget-conscious design with full observability
-- **User Experience:** Interactive dashboard with real-time feedback
-- **Practical Application:** Solves real research pain points
-- **Technical Depth:** RAG, vector search, LLM integration, contradiction detection
+```bash
+# Launch the Streamlit dashboard
+streamlit run app.py
 
----
+# Run tests
+pytest tests/ -v
+```
 
-## 👥 Team
+**Workflow:**
+1. Enter a research query in the top navigation bar
+2. (Optional) Upload PDF documents for RAG indexing
+3. Click **Launch** to start the 6-agent pipeline
+4. Watch the live pipeline visualization as each agent processes
+5. Review the generated report with citations, confidence scores, and insights
+6. Download the markdown report or explore the analytics panels
 
-**Deepti Parrikar** - Group 14  
-*Background:* QA & Banking Domain Experience
+## Agent Architecture
 
----
+| # | Agent | Role | Key Capabilities |
+|---|-------|------|-----------------|
+| 1 | **Research Coordinator** | Master orchestrator | Query analysis, expansion, routing hints |
+| 2 | **Contextual Retriever** | Evidence collector | Vector retrieval + web search, reranking, chunk assembly |
+| 3 | **Critical Analysis** | Evidence analyzer | Claim extraction, contradiction detection, evidence chains |
+| 4 | **Fact-Checker** | Claim verifier | Source credibility scoring, support-count validation |
+| 5 | **Insight Generator** | Pattern recognizer | Theme clustering, gap identification, hypothesis creation |
+| 6 | **Report Builder** | Final synthesis | Executive summary, key findings, citations, markdown output |
 
-**Submission Date:** February 15, 2026  
-**Hackathon:** Engineering Accelerator C4 Group Projects
+See [AGENTS.md](AGENTS.md) for detailed agent documentation and [ARCHITECTURE.md](ARCHITECTURE.md) for system design.
+
+## Dashboard Sections
+
+- **Top Navigation Bar** - Query input, launch/reset controls, advanced options, live summary cards
+- **Agent Pipeline Visualization** - Horizontal 6-card agent lane with animated state transitions
+- **Overall Progress Tracker** - Segmented progress strip with complete/total count
+- **Token Usage Dashboard** - Input/output/total tokens, per-agent cost and call count
+- **RAG Visualization Panel** - Embedding space view, retrieval waterfall, claims and evidence
+- **Results Section** - Pipeline metrics, fact-check totals, themes, contradiction-aware reporting
+- **Analytics and Insights** - Theme strength, verification distribution, evidence quality
+- **Cost Optimization Panel** - Most expensive agent, average cost per call, model-level awareness
+- **Export Options** - Download report as Markdown
+
+## Testing
+
+```bash
+pytest tests/ -v
+```
+
+## License
+
+This project was built as a hackathon submission for the AI Engineering Accelerator, Cohort 4.
